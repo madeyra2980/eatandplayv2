@@ -1,0 +1,48 @@
+/* MenuForm.css */
+.menu-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .menu-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .menu-form-container input,
+  .menu-form-container select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: calc(100% - 22px);
+    margin: 0 auto;
+  }
+  
+  .menu-form-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .menu-form-container button:hover {
+    background-color: #218838;
+  }
+  
+  .status-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  

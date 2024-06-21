@@ -1,0 +1,30 @@
+/* CategoryItems.css */
+.category-items-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .category-items-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .category-items-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .category-items-container th, .category-items-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .category-items-container th {
+    background-color: #f2f2f2;
+  }
+  

@@ -1,0 +1,54 @@
+
+.header_banner {
+    width: 1390px;
+    padding: 20px;
+    margin: 49px auto;
+    z-index: 1;
+    background-color: #565656;
+    position: relative;
+    border-radius: 15px;
+    font-family: "Raleway", sans-serif;
+}
+
+.header_banner h1{
+    font-size: 80px;
+}
+
+.header_banner h1, 
+.header_banner p {
+    color: white;
+    padding: 20px;
+}
+
+.header_banner span {
+    color: #6DDF37;
+}
+
+.shashki_main {
+    position: absolute;
+    right: -20px; /* Сдвигаем элемент */
+    top: 0;
+}
+
+.header_items {
+    display: flex;
+    gap: 10px;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.header_items_card{
+    background-color:#494949 ;
+    width: 350px;
+    padding: 20px;
+    font-family: "Raleway", sans-serif;
+    border-radius: 15px;
+}   
+
+.stake_main{
+    position: absolute;
+}
+
+.header_items_card p{
+    padding: 15px 0px;
+}

@@ -1,0 +1,15 @@
+.App{
+    min-height: 100vh;
+    background-color: #232323;
+    position: relative;
+    overflow: hidden; 
+}
+
+.select_institution{
+    z-index: 3;
+    position: relative;
+    padding: 0px 45px;
+    margin: auto;
+    font-family: "Raleway", sans-serif;
+    color: #9D9D9D;
+}

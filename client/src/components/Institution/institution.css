@@ -1,0 +1,32 @@
+.main_block_institutions {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px; 
+    top: 0;
+  }
+  
+  .institution_card {
+    position: relative;
+    width: 400px;
+    color: white;
+    background-color: aqua;
+    overflow: hidden; 
+  }
+  
+  .institution_card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .title_restaurant {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: add background for better visibility */
+    padding: 10px; /* Optional: add padding */
+    margin: 0; /* Remove default margin */
+  }
+  

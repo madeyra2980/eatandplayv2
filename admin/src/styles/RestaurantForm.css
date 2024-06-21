@@ -1,0 +1,51 @@
+/* RestaurantForm.css */
+.restaurant-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .restaurant-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .restaurant-form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .restaurant-form-container input[type="text"],
+  .restaurant-form-container textarea,
+  .restaurant-form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .restaurant-form-container input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  .restaurant-form-container button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .restaurant-form-container button:hover {
+    background-color: #218838;
+  }
+  
