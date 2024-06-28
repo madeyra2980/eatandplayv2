@@ -7,6 +7,8 @@ import kubik from '../../assets/kubik.png'
 import sales from '../../assets/sales.png'
 import video from '../../assets/video.png'
 import './Main.css'
+import Institution from '../Institution'
+
 
 const Main = () => {
     return (
@@ -38,7 +40,7 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-            
+                <Institution/>
             </div>
         </div>
     )

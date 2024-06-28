@@ -64,6 +64,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const dishes = await Dish.find().populate('category', 'name');
+        // res.json(dishes);
         res.json(dishes);
     } catch (err) {
         console.error('Ошибка при получении списка блюд:', err);

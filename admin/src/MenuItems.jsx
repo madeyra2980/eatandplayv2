@@ -44,7 +44,6 @@ const MenuItems = () => {
   }, []);
 
   const handleEdit = (id) => {
-    // Найти ресторан по ID и установить данные для редактирования
     const restaurant = menuItems.find(item => item._id === id);
     if (restaurant) {
       setEditingItemId(id);

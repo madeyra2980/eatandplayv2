@@ -1,13 +1,13 @@
 import React from 'react'
 import MainBanner from '../MainBanner'
-import Institution from '../Institution'
 import './Mainpage.css'
+import Footer from '../Footer'
 
 const MainPage = () => {
   return (
     <div className='App'>
         <MainBanner/>
-        <Institution/>
+        <Footer/>
     </div>
   )
 }

@@ -1,0 +1,65 @@
+.card_menu_game {
+    width: 430px;
+    height: 420px;
+    cursor: pointer;
+    background-color: #565656;
+    border-radius: 20px;
+    font-family: "Raleway", sans-serif;
+  }
+  
+  .card_menu_game img {
+    width: 100%;
+  }
+  
+  .card_menu_game p {
+    padding: 20px 30px;
+  }
+  
+  .restaurant-games {
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-iframe {
+    width: 100%;
+    min-height:100vh;
+    border: none;
+  }
+  
+  .modal-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .modal-button:hover {
+    background-color: #f0f0f0;
+  }
+  
