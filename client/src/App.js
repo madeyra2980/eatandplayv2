@@ -21,8 +21,8 @@ const App = () => {
             <Route path="/restaurant/:id/menu" element={<RestaurantMenu />} />
             <Route path="/games/:id" element={<RestaurantGames />} />
             <Route path="/my-orders/:id" element={<MyOrders />} />
-            </Routes>
-        </Router>
+        </Routes>
+      </Router>
       </RestaurantsProvider>
     </OrdersProvider>
   );

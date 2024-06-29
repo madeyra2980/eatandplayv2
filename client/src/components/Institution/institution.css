@@ -1,31 +1,46 @@
 .main_block_institutions {
-    position: relative;
-    width: 80%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px; 
-    top: 0;
-  }
-  
-  .institution_card {
-    position: relative;
-    width: 400px;
-    color: white;
-    overflow: hidden; 
-  }
-  
-  .institution_card img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .title_restaurant {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: add background for better visibility */
-    padding: 10px; /* Optional: add padding */
-    margin: 0; /* Remove default margin */
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.institution_card {
+  background-color: #494949;
+  border-radius: 15px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.institution_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.image_container {
+  position: relative;
+}
+
+.institution_image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.title_restaurant {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  bottom: 0;
+  right: 0; 
+  text-decoration: underline;
+  font-family: "Raleway", sans-serif;
+}

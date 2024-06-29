@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
-const PORT = process.env.PORT || 3009;
+const PORT = process.env.PORT || 3003;
 const DB = process.env.MONGO_DB;
 
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,8 +17,8 @@ db.once('open', () => {
     console.log('Подключение к MongoDB установлено');
 });
 
-const dishRoutes = require('./routes/dish');
-const Categories = require('./routes/categories');
+const dishRoutes = require('./routes/Dish');
+const Categories = require('./routes/Categories');
 const restaurants = require('./routes/Restaurants')
 
 const storage = multer.diskStorage({
@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 1024 * 1024 * 5 }, // Лимит размера файла (5MB)
+    limits: { fileSize: 1024 * 1024 * 5 }, 
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image')) {
             cb(null, true);

@@ -1,54 +1,89 @@
-
+.container_main {
+    position: relative;
+    padding: 50px 0;
+}
 .header_banner {
-    width: 1390px;
-    padding: 20px;
-    margin: 49px auto;
+    width: 80%;
     z-index: 1;
     background-color: #565656;
     position: relative;
     border-radius: 15px;
     font-family: "Raleway", sans-serif;
+    margin: 50px auto 0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-.header_banner h1{
-    font-size: 80px;
+.header_banner h1 {
+    font-size: 60px;
+    margin: 0;
 }
-
 .header_banner h1, 
 .header_banner p {
     color: white;
-    padding: 20px;
+    padding: 20px 0;
 }
-
 .header_banner span {
     color: #6DDF37;
+    display: inline-flex;
+    align-items: center;
 }
-
+.header_banner span img {
+    margin-left: 10px;
+}
 .shashki_main {
     position: absolute;
-    right: -20px; /* Сдвигаем элемент */
+    right: -20px; 
     top: 0;
 }
-
 .header_items {
-    display: flex;
-    gap: 10px;
-    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
     border-radius: 20px;
 }
 
-.header_items_card{
-    background-color:#494949 ;
-    width: 350px;
+@media screen and (max-width: 1065px) {
+    .header_items {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header_items {
+        grid-template-columns: 1fr;
+    }
+
+    .header_banner h1 {
+        font-size: 40px;
+    }
+
+    .header_banner {
+        width: 90%;
+    }
+}
+.header_items_card {
+    background-color: #494949;
     padding: 20px;
     font-family: "Raleway", sans-serif;
     border-radius: 15px;
-}   
-
-.stake_main{
-    position: absolute;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
-
-.header_items_card p{
-    padding: 15px 0px;
+.header_items_card:hover {
+    transform: translateY(-10px);
+}
+.header_items_card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.header_items_card p {
+    padding: 15px 0 0;
+    color: #fff;
+    font-size: 16px;
+}
+.stake_main {
+    position: absolute;
 }

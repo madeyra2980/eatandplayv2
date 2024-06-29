@@ -1,7 +1,90 @@
-.sum_total_menu{
+.clear-orders {
+    background-color: #6DDF37;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .clear-orders:hover {
+    background-color: #4CAF50;
+  }
+  
+  .sum_total_menu {
     width: 90%;
     margin: auto;
     padding: 10px 20px;
     line-height: 1;
     background-color: #565656;
-}
+    color: white;
+    font-family: "Raleway", sans-serif;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  
+  .sum_total_menu p {
+    margin: 5px 0;
+  }
+  
+  .total_price {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .detail_menu {
+    margin-top: 10px;
+  }
+  
+  .detail_menu button {
+    background-color: transparent;
+    border: none;
+    color: #6DDF37;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .detail_menu button:hover {
+    color: #4CAF50;
+  }
+  
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .quantity-control button {
+    background-color: #6DDF37;
+    color: white;
+    border: none;
+    font-family: "Raleway", sans-serif;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .quantity-control button:hover {
+    background-color: #4CAF50;
+  }
+  
+  .quantity-control span {
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .quantity-control button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+    

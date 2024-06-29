@@ -47,8 +47,8 @@ const RestaurantGames = () => {
   return (
     <div className='games'>
       <header>
+        <div className='header-content'>
         <Link to={`/restaurant/${restaurant._id}`}>Назад</Link>
-        <>
           <div className='header_logo'>
             <img src={restaurant.logo} alt={`${restaurant.title}`} />
           </div>
@@ -57,10 +57,11 @@ const RestaurantGames = () => {
           <div className='info-block info-block-green'><span>Позвонить</span></div>
           <div><img src={whatsapp} alt='whatsapp' /></div>
           <div><img src={instagram} alt='instagram' /></div>
-          {/* <div className='my-orders'>
-            <Link to='/my-orders'>Мой заказ <img src={heartVector} alt='heart' /></Link>
-          </div> */}
-        </>
+        </div>
+        <div className='my-orders'>
+            <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
+            <img src={heartVector} alt='heart' className="heart-icon" />
+          </div>
       </header>
 
       <div className='title_menu'>

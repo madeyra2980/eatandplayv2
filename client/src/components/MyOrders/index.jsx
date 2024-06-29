@@ -8,13 +8,13 @@ import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
 import heartVector from '../../assets/Vector.png';
 import heartIconBtn from '../../assets/hearticonbtn.png';
+import Footer from '../Footer/'
 import './MyOrders.css';
 
 const MyOrders = () => {
   const { orders, removeFromOrders, incrementOrderQuantity, decrementOrderQuantity, clearOrders } = useOrders();
   const { restaurant, loading, error, getFetchDataRestaurant } = useRestaurants();
   const { id } = useParams();
-  {console.log(id)}
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', description: '', image: '', price: '' });
   const [totalSum, setTotalSum] = useState(0);
@@ -66,16 +66,21 @@ const MyOrders = () => {
   return (
     <div>
       <header>
-        <Link to={`/restaurant/${restaurant._id}/menu`}>Назад</Link>
-        <div className='header_logo'>
-          <img src={restaurant.logo} alt={`${restaurant.title}`} />
+        <div className='header-content'>
+          <Link to={`/restaurant/${restaurant._id}/menu`}>Назад</Link>
+          <div className='header_logo'>
+            <img src={restaurant.logo} alt={`${restaurant.title}`} />
+          </div>
+          <div className='info-block'><img src={timeclock} alt='time' /> 12:00-01:00</div>
+          <div className='info-block'><img src={location} alt='location' /> БЦ «ERTIS», Абая 99B, 3 этаж</div>
+          <div className='info-block info-block-green'><span>Позвонить</span></div>
+          <div><img src={whatsapp} alt='whatsapp' /></div>
+          <div><img src={instagram} alt='instagram' /></div>
         </div>
-        <div className='info-block'><img src={timeclock} alt='time' /> 12:00-01:00</div>
-        <div className='info-block'><img src={location} alt='location' /> БЦ «ERTIS», Абая 99B, 3 этаж</div>
-        <div className='info-block info-block-green'><span>Позвонить</span></div>
-        <div><img src={whatsapp} alt='whatsapp' /></div>
-        <div><img src={instagram} alt='instagram' /></div>
-        <div className='my-orders'>Мой заказ <img src={heartVector} alt='heart' /></div>
+        <div className='my-orders'>
+          <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
+          <img src={heartVector} alt='heart' className="heart-icon" />
+        </div>
       </header>
 
       <div className='title_menu'>
@@ -94,8 +99,8 @@ const MyOrders = () => {
                 <div className='menu-item'>
                   <div className='left_item_menu'>
                     <h3>{order.title}</h3>
-                    <button 
-                      className='like-btn' 
+                    <button
+                      className='like-btn'
                       onClick={() => handleRemoveFromOrder(order)}>
                       <img src={isFavorite(order) ? heartIconBtn : heartVector} alt="Like" />
                     </button>
@@ -105,12 +110,12 @@ const MyOrders = () => {
                     <div className='detail_menu'>
                       <button onClick={() => showModal(order.title, order.description, order.image, order.price)}>Подробнее</button>
                     </div>
-                    <div className='quantity-control'>
-                      <button onClick={() => decrementOrderQuantity(order._id)}>-</button>
-                      <span>{order.quantity}</span>
-                      <button onClick={() => incrementOrderQuantity(order._id)}>+</button>
-                    </div>
                   </div>
+                </div>
+                <div className='quantity-control'>
+                  <button onClick={() => decrementOrderQuantity(order._id)}>-</button>
+                  <span>{order.quantity}</span>
+                  <button onClick={() => incrementOrderQuantity(order._id)}>+</button>
                 </div>
               </div>
             ))
@@ -133,6 +138,8 @@ const MyOrders = () => {
           </div>
         </div>
       )}
+
+      <Footer/>
 
       {modalVisible && (
         <div className='modals'>
