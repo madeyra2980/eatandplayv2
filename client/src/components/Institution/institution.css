@@ -1,10 +1,51 @@
 .main_block_institutions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 10px 0px;
   gap: 20px;
-  padding: 40px 20px;
-  max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  width: 80%;
+}
+
+.restaurants_items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.filter_preference {
+  height: auto;
+  background-color: #565656;
+  padding: 20px 10px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.filter_preference p {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.filter_preference div {
+  margin-bottom: 10px;
+}
+
+.filter_preference input {
+  margin-right: 10px;
+}
+
+.filter_preference label {
+  color: white;
+}
+
+.search_input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .institution_card {
@@ -34,13 +75,37 @@
 
 .title_restaurant {
   position: absolute;
-  transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 10px;
   bottom: 0;
-  right: 0; 
+  right: 0;
   text-decoration: underline;
   font-family: "Raleway", sans-serif;
+  background-color: rgba(148, 148, 148, 0.6);
+}
+
+.filter_categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #565656;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.category_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category_checkbox {
+  accent-color: #494949;
+}
+
+.category_label {
+  color: white;
 }

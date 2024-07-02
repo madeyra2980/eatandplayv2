@@ -8,27 +8,43 @@ const RestaurantForm = () => {
     logo: null,
     banner: null,
     selectedDishes: [],
-    dishes: []
+    selectedPreference: '',
+    preferences: [],
+    dishes: [],
+    instagram: '',
+    whatsapp: '',
+    oClock: '',
+    address: '',
+    phoneNumber: '',
+    promotions: []
   });
 
   useEffect(() => {
-    const fetchDishes = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/dishes');
-        if (!response.ok) {
+        const [dishesResponse, preferencesResponse] = await Promise.all([
+          fetch('http://localhost:8080/dishes'),
+          fetch('http://localhost:8080/preference')
+        ]);
+
+        if (!dishesResponse.ok || !preferencesResponse.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+
+        const dishes = await dishesResponse.json();
+        const preferences = await preferencesResponse.json();
+
         setRestaurantData(prevState => ({
           ...prevState,
-          dishes: data
+          dishes: dishes,
+          preferences: preferences
         }));
       } catch (error) {
-        console.error('Error fetching dishes:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchDishes();
+    fetchData();
   }, []);
 
   const handleInputChange = (event) => {
@@ -37,16 +53,40 @@ const RestaurantForm = () => {
   };
 
   const handleDishSelection = (event) => {
-    const { options } = event.target;
-    const selectedDishes = Array.from(options)
+    const selectedDishes = Array.from(event.target.options)
       .filter(option => option.selected)
       .map(option => option.value);
-    setRestaurantData({ ...restaurantData, selectedDishes });
+    setRestaurantData(prevState => ({ ...prevState, selectedDishes }));
+  };
+
+  const handlePreferenceSelection = (event) => {
+    setRestaurantData(prevState => ({ ...prevState, selectedPreference: event.target.value }));
   };
 
   const handleFileInputChange = (event) => {
     const { name, files } = event.target;
-    setRestaurantData({ ...restaurantData, [name]: files[0] });
+    setRestaurantData(prevState => ({ ...prevState, [name]: files[0] }));
+  };
+
+  const handlePromotionInputChange = (event, index) => {
+    const { name, value } = event.target;
+    const promotions = [...restaurantData.promotions];
+    promotions[index] = { ...promotions[index], [name]: value };
+    setRestaurantData({ ...restaurantData, promotions });
+  };
+
+  const handlePromotionFileInputChange = (event, index) => {
+    const { files } = event.target;
+    const promotions = [...restaurantData.promotions];
+    promotions[index] = { ...promotions[index], image: files[0] };
+    setRestaurantData({ ...restaurantData, promotions });
+  };
+
+  const addPromotion = () => {
+    setRestaurantData(prevState => ({
+      ...prevState,
+      promotions: [...prevState.promotions, { description: '', image: null }]
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -61,6 +101,34 @@ const RestaurantForm = () => {
       restaurantData.selectedDishes.forEach(dishId => {
         formData.append('dishes', dishId);
       });
+      formData.append('preferenceName', restaurantData.selectedPreference);
+      formData.append('instagram', restaurantData.instagram);
+      formData.append('whatsapp', restaurantData.whatsapp);
+      formData.append('oClock', restaurantData.oClock);
+      formData.append('address', restaurantData.address);
+      formData.append('phoneNumber', restaurantData.phoneNumber);
+      formData.append('promotions', JSON.stringify(restaurantData.promotions.map(({ description }) => ({ description }))));
+
+      restaurantData.promotions.forEach(({ image }, index) => {
+        if (image) {
+          formData.append(`promotionImages`, image);
+        }
+      });
+
+      console.log('Отправляемые данные:', {
+        title: restaurantData.title,
+        description: restaurantData.description,
+        logo: restaurantData.logo,
+        banner: restaurantData.banner,
+        selectedDishes: restaurantData.selectedDishes,
+        selectedPreference: restaurantData.selectedPreference,
+        instagram: restaurantData.instagram,
+        whatsapp: restaurantData.whatsapp,
+        oClock: restaurantData.oClock,
+        address: restaurantData.address,
+        phoneNumber: restaurantData.phoneNumber,
+        promotions: restaurantData.promotions
+      });
 
       const response = await fetch('http://localhost:8080/restaurants', {
         method: 'POST',
@@ -72,19 +140,31 @@ const RestaurantForm = () => {
       }
 
       const data = await response.json();
-      console.log('Restaurant created successfully:', data);
+      console.log('Ресторан успешно создан:', data);
 
+      // Очистка формы после успешной отправки
       setRestaurantData({
         title: '',
         description: '',
         logo: null,
         banner: null,
         selectedDishes: [],
-        dishes: restaurantData.dishes
+        selectedPreference: '',
+        preferences: [],
+        dishes: [],
+        instagram: '',
+        whatsapp: '',
+        oClock: '',
+        address: '',
+        phoneNumber: '',
+        promotions: []
       });
 
+      alert('Ресторан успешно создан!');
+
     } catch (error) {
-      console.error('Error creating restaurant:', error);
+      console.error('Ошибка при создании ресторана:', error);
+      alert('Произошла ошибка при создании ресторана. Пожалуйста, попробуйте еще раз.');
     }
   };
 
@@ -130,6 +210,19 @@ const RestaurantForm = () => {
           />
         </label>
         <label>
+          Выбрать предпочтение:
+          <select
+            value={restaurantData.selectedPreference}
+            onChange={handlePreferenceSelection}
+            required
+          >
+            <option value="">Выберите предпочтение</option>
+            {restaurantData.preferences.map(preference => (
+              <option key={preference._id} value={preference._id}>{preference.preferenceName}</option>
+            ))}
+          </select>
+        </label>
+        <label>
           Выбрать меню:
           <select
             multiple
@@ -142,6 +235,82 @@ const RestaurantForm = () => {
             ))}
           </select>
         </label>
+        <label>
+          Instagram:
+          <input
+            type="text"
+            name="instagram"
+            value={restaurantData.instagram}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          WhatsApp:
+          <input
+            type="text"
+            name="whatsapp"
+            value={restaurantData.whatsapp}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Рабочие часы:
+          <input
+            type="text"
+            name="oClock"
+            value={restaurantData.oClock}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Адрес:
+          <input
+            type="text"
+            name="address"
+            value={restaurantData.address}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Номер телефона:
+          <input
+            type="text"
+            name="phoneNumber"
+            value={restaurantData.phoneNumber}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <div>
+          <h3>Акции и скидки</h3>
+          {restaurantData.promotions.map((promotion, index) => (
+            <div key={index}>
+              <label>
+                Описание акции:
+                <input
+                  type="text"
+                  name="description"
+                  value={promotion.description}
+                  onChange={(event) => handlePromotionInputChange(event, index)}
+                  required
+                />
+              </label>
+              <label>
+                Изображение акции:
+                <input
+                  type="file"
+                  onChange={(event) => handlePromotionFileInputChange(event, index)}
+                  required
+                />
+              </label>
+            </div>
+          ))}
+          <button type="button" onClick={addPromotion}>Добавить акцию</button>
+        </div>
         <button type="submit">Создать ресторан</button>
       </form>
     </div>

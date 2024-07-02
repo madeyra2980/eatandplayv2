@@ -19,7 +19,8 @@ db.once('open', () => {
 
 const dishRoutes = require('./routes/Dish');
 const Categories = require('./routes/Categories');
-const restaurants = require('./routes/Restaurants')
+const restaurants = require('./routes/Restaurants');
+const PreferenceRoutes = require('./routes/Preference');
 
 const storage = multer.diskStorage({
     destination: './upload/images',
@@ -44,7 +45,8 @@ const app = express();
 
 require('./models/Dish');
 require('./models/Categories');
-require('./models/Restaurants')
+require('./models/Restaurants');
+require('./models/Preference');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -62,10 +64,11 @@ app.post('/upload', upload.single('image'), (req, res) => {
 });
 
 app.use('/images', express.static('upload/images'));
-
-app.use('/restaurants', restaurants)
+    
+app.use('/restaurants', restaurants);
 app.use('/dishes', dishRoutes);
-app.use('/categories', Categories)
+app.use('/categories', Categories);
+app.use('/preference', PreferenceRoutes);
 
 app.listen(PORT, () => {
     console.log(`Сервер работает на порту ${PORT}`);

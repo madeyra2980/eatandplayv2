@@ -33,11 +33,11 @@ const RestaurantDetail = () => {
           <div className='header_logo'>
             <img src={restaurant.logo} alt={`${restaurant.title}`} />
           </div>
-          <div className='info-block'><img src={timeclock} alt='time' /> 12:00-01:00</div>
-          <div className='info-block'><img src={location} alt='location' /> БЦ «ERTIS», Абая 99B, 3 этаж</div>
-          <div className='info-block info-block-green'><span>Позвонить</span></div>
-          <div><img src={whatsapp} alt='whatsapp' /></div>
-          <div><img src={instagram} alt='instagram' /></div>
+          <div className='info-block'><img src={timeclock} alt='time' /> {restaurant.oClock}</div>
+          <div className='info-block'><img src={location} alt='location' /> {restaurant.address}</div>
+          <div className='info-block info-block-green'><span>{restaurant.phoneNumber}</span></div>
+          <div><a href={restaurant.whatsapp}><img src={whatsapp} alt='whatsapp' /></a></div>
+          <div><a href={restaurant.instagram}><img src={instagram} alt='instagram' /></a></div>
         </div>
         <div className='my-orders'>
             <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>

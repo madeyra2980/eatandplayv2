@@ -6,6 +6,8 @@ import CategoryForm from './CategoryForm';
 import CategoryItems from './CategoryItems';
 import RestaurantForm from './RestaurantForm';
 import RestaurantItems from './RestaurantItems';
+import AddPreference from './AddPreference';
+import GetPreference from './GetPreference'
 
 import './App.css';
 
@@ -33,15 +35,24 @@ function App() {
             <li>
               <Link to="/menu-items">Блюды</Link>
             </li>
+            <li>
+              <Link to="/preference">Предпочтений</Link>
+            </li>
+            <li>
+              <Link to="/preference-items">Предпочтений</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/menu-form" element={<MenuForm />} />
+          <Route path="/menu-items" element={<MenuItems />} />
           <Route path="/category-form" element={<CategoryForm />} />
           <Route path="/categories" element={<CategoryItems />} />
           <Route path="/restaurant-form" element={<RestaurantForm />} />
           <Route path="/restaurants" element={<RestaurantItems />} />
-          <Route path="/menu-items" element={<MenuItems />} />
+          <Route path="/preference" element={<AddPreference />} />
+          <Route path="/preference-items" element={<GetPreference />} />
+
           <Route path="/" element={<h2>Добро пожаловать в приложение для управления рестораном</h2>} />
         </Routes>
       </div>

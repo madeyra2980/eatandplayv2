@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Restaurant = require("../models/Restaurants");
-const Dish = require("../models/Dish"); 
+const Dish = require("../models/Dish");
 const multer = require("multer");
 const path = require("path");
 const PORT = process.env.PORT || 3009;
+const Preference = require('../models/Preference')
 
 const storage = multer.diskStorage({
   destination: "./upload/images",
@@ -35,16 +36,23 @@ router.post(
   upload.fields([
     { name: "logo", maxCount: 1 },
     { name: "banner", maxCount: 1 },
+    { name: "promotionImages", maxCount: 10 }
   ]),
   async (req, res) => {
     try {
-      const { title, description, dishes } = req.body;
-
-      if (!title || !description || !dishes) {
+      const { title, description, dishes, preferenceName, instagram, whatsapp, oClock, address, phoneNumber, promotions } = req.body; 
+      if (!title || !description || !dishes || !preferenceName || !instagram || !whatsapp || !oClock || !address || !phoneNumber || !promotions) {
         return res
           .status(400)
           .json({ error: "Не все обязательные поля заполнены" });
       }
+
+      const dishesArray = dishes.split(',').map(id => id.trim());
+      const preferencesArray = preferenceName.split(',').map(id => id.trim());
+      const promotionsArray = JSON.parse(promotions).map((promotion, index) => ({
+        description: promotion.description,
+        image: `http://localhost:${PORT}/images/${req.files["promotionImages"][index].filename}`
+      }));
 
       const logo_url = `http://localhost:${PORT}/images/${req.files["logo"][0].filename}`;
       const banner_url = `http://localhost:${PORT}/images/${req.files["banner"][0].filename}`;
@@ -54,7 +62,14 @@ router.post(
         description,
         logo: logo_url,
         banner: banner_url,
-        dishes,
+        dishes: dishesArray,
+        preferences: preferencesArray,
+        instagram,
+        whatsapp,
+        oClock,
+        address,
+        phoneNumber,
+        promotions: promotionsArray
       });
 
       const savedRestaurant = await newRestaurant.save();
@@ -62,9 +77,7 @@ router.post(
       res.status(201).json(savedRestaurant);
     } catch (err) {
       console.error("Ошибка сохранения ресторана:", err);
-      res
-        .status(500)
-        .json({ error: "Ошибка сервера при сохранении ресторана" });
+      res.status(500).json({ error: "Ошибка сервера при сохранении ресторана" });
     }
   }
 );
@@ -77,7 +90,7 @@ router.get("/", async (req, res) => {
         path: "category",
         select: "name",
       },
-    });
+    }).populate({ path: "preferences", select: "preferenceName" });
 
     res.json(restaurants);
   } catch (err) {
@@ -90,14 +103,15 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const restaurant = await Restaurant.findById(req.params.id).populate({
-      path: "dishes",
-      populate: {
-        path: "category",
-        select: "name",
-      },
-    });
-
+    const restaurant = await Restaurant.findById(req.params.id)
+      .populate({
+        path: "dishes",
+        populate: {
+          path: "category",
+          select: "name",
+        },
+      })
+      .populate({ path: "preferences", select: "preferenceName" });
     if (restaurant) {
       res.json(restaurant);
     } else {
@@ -111,12 +125,12 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const restaurantId = req.params.id;
-  const { title, description, dishes } = req.body;
+  const { title, description, dishes, instagram, whatsapp, oClock, address, phoneNumber, promotions } = req.body;
 
   try {
     const updatedRestaurant = await Restaurant.findByIdAndUpdate(
       restaurantId,
-      { title, description, dishes },
+      { title, description, dishes, instagram, whatsapp, oClock, address, phoneNumber, promotions },
       { new: true }
     );
 
@@ -155,13 +169,17 @@ router.delete("/:restaurantId/dishes/:dishId", async (req, res) => {
       return res.status(404).json({ error: "Ресторан не найден" });
     }
 
-    restaurant.dishes = restaurant.dishes.filter(id => id.toString() !== dishId);
+    restaurant.dishes = restaurant.dishes.filter(
+      (id) => id.toString() !== dishId
+    );
     await restaurant.save();
 
     res.json({ message: "Блюдо успешно удалено из ресторана" });
   } catch (err) {
     console.error("Ошибка при удалении блюда из ресторана:", err);
-    res.status(500).json({ error: "Ошибка сервера при удалении блюда из ресторана" });
+    res
+      .status(500)
+      .json({ error: "Ошибка сервера при удалении блюда из ресторана" });
   }
 });
 
@@ -183,8 +201,74 @@ router.post("/:id/dishes", async (req, res) => {
     res.json(restaurant);
   } catch (err) {
     console.error("Ошибка при добавлении блюда в ресторан:", err);
-    res.status(500).json({ error: "Ошибка сервера при добавлении блюда в ресторан" });
+    res
+      .status(500)
+      .json({ error: "Ошибка сервера при добавлении блюда в ресторан" });
   }
 });
+
+router.get("/:id/dishes", async (req, res) => {
+  try {
+    const restaurant = await Restaurant.findById(req.params.id).populate('dishes');
+    if (restaurant) {
+      res.json(restaurant.dishes);
+    } else {
+      res.status(404).json({ error: "Restaurant not found" });
+    }
+  } catch (err) {
+    console.error("Error fetching dishes for restaurant:", err);
+    res.status(500).json({ error: "Server error fetching dishes for restaurant" });
+  }
+});
+
+router.post("/:id/preferences", async (req, res) => {
+  const restaurantId = req.params.id;
+  const { preferenceId } = req.body;
+
+  try {
+    const restaurant = await Restaurant.findById(restaurantId);
+    const preference = await Preference.findById(preferenceId);
+
+    if (!restaurant || !preference) {
+      return res.status(404).json({ error: "Ресторан или предпочтение не найдено" });
+    }
+
+    // Проверка на дублирование предпочтения
+    if (restaurant.preferences.includes(preferenceId)) {
+      return res.status(400).json({ error: "Предпочтение уже добавлено в ресторан" });
+    }
+
+    restaurant.preferences.push(preference._id);
+    await restaurant.save();
+
+    res.json(restaurant);
+  } catch (err) {
+    console.error("Ошибка при добавлении предпочтения в ресторан:", err);
+    res.status(500).json({ error: "Ошибка сервера при добавлении предпочтения в ресторан" });
+  }
+});
+
+// Маршрут для удаления предпочтений из ресторана
+router.delete("/:restaurantId/preferences/:preferenceId", async (req, res) => {
+  const { restaurantId, preferenceId } = req.params;
+
+  try {
+    const restaurant = await Restaurant.findById(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ error: "Ресторан не найден" });
+    }
+
+    restaurant.preferences = restaurant.preferences.filter(
+      (id) => id.toString() !== preferenceId
+    );
+    await restaurant.save();
+
+    res.json({ message: "Предпочтение успешно удалено из ресторана" });
+  } catch (err) {
+    console.error("Ошибка при удалении предпочтения из ресторана:", err);
+    res.status(500).json({ error: "Ошибка сервера при удалении предпочтения из ресторана" });
+  }
+});
+
 
 module.exports = router;

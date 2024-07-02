@@ -5,6 +5,9 @@ const RestaurantItems = () => {
   const [dishes, setDishes] = useState([]);
   const [newDish, setNewDish] = useState({ dishId: '', restaurantId: '' });
   const [selectedDishForDeletion, setSelectedDishForDeletion] = useState({ dishId: '', restaurantId: '' });
+  const [preferences, setPreferences] = useState([]);
+  const [newPreference, setNewPreference] = useState({ preferenceId: '', restaurantId: '' });
+  const [selectedPreferenceForDeletion, setSelectedPreferenceForDeletion] = useState({ preferenceId: '', restaurantId: '' });
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -38,6 +41,23 @@ const RestaurantItems = () => {
     };
 
     fetchDishes();
+  }, []);
+
+  useEffect(() => {
+    const fetchPreferences = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/preference');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPreferences(data);
+      } catch (error) {
+        console.error('Error fetching preferences:', error);
+      }
+    };
+
+    fetchPreferences();
   }, []);
 
   const deleteRestaurant = async (id) => {
@@ -74,11 +94,12 @@ const RestaurantItems = () => {
       }
       const updatedRestaurants = await fetch('http://localhost:8080/restaurants').then(res => res.json());
       setRestaurants(updatedRestaurants);
-      setSelectedDishForDeletion({ dishId: '', restaurantId: '' }); // Reset selection
+      setSelectedDishForDeletion({ dishId: '', restaurantId: '' }); 
     } catch (error) {
       console.error('Error deleting dish:', error);
     }
   };
+
   const handleAddDish = async (event, restaurantId) => {
     event.preventDefault();
     try {
@@ -101,6 +122,56 @@ const RestaurantItems = () => {
       console.error('Error adding dish:', error);
     }
   };
+
+  const handleAddPreference = async (event, restaurantId) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:8080/restaurants/${restaurantId}/preferences`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ preferenceId: newPreference.preferenceId }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const updatedRestaurant = await response.json();
+      setRestaurants(restaurants.map(restaurant =>
+        restaurant._id === updatedRestaurant._id ? updatedRestaurant : restaurant
+      ));
+      setNewPreference({ preferenceId: '', restaurantId: '' });
+    } catch (error) {
+      console.error('Error adding preference:', error);
+    }
+  };
+
+  const handlePreferenceDeletionChange = (event, restaurantId) => {
+    setSelectedPreferenceForDeletion({ preferenceId: event.target.value, restaurantId });
+  };
+
+  const deletePreference = async () => {
+    if (!selectedPreferenceForDeletion.preferenceId || !selectedPreferenceForDeletion.restaurantId) return;
+    try {
+      const response = await fetch(`http://localhost:8080/restaurants/${selectedPreferenceForDeletion.restaurantId}/preferences/${selectedPreferenceForDeletion.preferenceId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const updatedRestaurants = await fetch('http://localhost:8080/restaurants').then(res => res.json());
+      setRestaurants(updatedRestaurants);
+      setSelectedPreferenceForDeletion({ preferenceId: '', restaurantId: '' });
+    } catch (error) {
+      console.error('Error deleting preference:', error);
+    }
+  };
+
+  const handlePreferenceChange = (event) => {
+    const { name, value } = event.target;
+    setNewPreference({ ...newPreference, [name]: value });
+  };
+
   return (
     <div>
       <h2>Список ресторанов</h2>
@@ -123,9 +194,6 @@ const RestaurantItems = () => {
               <td><img src={restaurant.logo} alt="Логотип ресторана" style={{ maxWidth: '100px' }} /></td>
               <td><img src={restaurant.banner} alt="Баннер ресторана" style={{ maxWidth: '100px' }} /></td>
               <td>
-                <ul>
-                  {restaurant.dishes.map(dish => (<li key={dish._id}>{dish.title}</li>))}
-                </ul>
                 <form onSubmit={(event) => handleAddDish(event, restaurant._id)}>
                   <select name="dishId" value={newDish.dishId} onChange={handleInputChange} required>
                     <option value="">Выберите блюдо</option>
@@ -138,6 +206,21 @@ const RestaurantItems = () => {
                   {restaurant.dishes.map(dish => (<option key={dish._id} value={dish._id}>{dish.title}</option>))}
                 </select>
                 <button onClick={deleteDish}>Удалить блюдо</button>
+                <br/>
+                <form onSubmit={(event) => handleAddPreference(event, restaurant._id)}>
+                  <select name="preferenceId" value={newPreference.preferenceId} onChange={handlePreferenceChange} required>
+                    <option value="">Выберите предпочтение для добавления</option>
+                    {preferences.map(preference => (
+                      <option key={preference._id} value={preference._id}>{preference.preferenceName}</option>
+                    ))}
+                  </select>
+                  <button type="submit">Добавить предпочтение</button>
+                </form>
+                <select onChange={(event) => handlePreferenceDeletionChange(event, restaurant._id)} value={selectedPreferenceForDeletion.preferenceId}>
+                  <option value="">Выберите предпочтение для удаления</option>
+                  {restaurant.preferences.map(preference => (<option key={preference._id} value={preference._id}>{preference.preferenceName}</option>))}
+                </select>
+                <button onClick={deletePreference}>Удалить предпочтение</button>
               </td>
               <td><button onClick={() => deleteRestaurant(restaurant._id)}>Удалить</button></td>
             </tr>

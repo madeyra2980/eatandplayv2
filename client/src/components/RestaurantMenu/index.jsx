@@ -8,7 +8,7 @@ import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
 import heartVector from '../../assets/Vector.png';
 import heartIconBtn from '../../assets/hearticonbtn.png';
-import Footer from '../Footer'
+import Footer from '../Footer';
 import './RestaurantMenu.css';
 
 const RestaurantMenu = () => {
@@ -17,9 +17,9 @@ const RestaurantMenu = () => {
   const { orders, toggleFavorite } = useOrders();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', description: '', image: '', price: '' });
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching restaurant data...');
     getFetchDataRestaurant(id);
   }, [id, getFetchDataRestaurant]);
 
@@ -41,6 +41,19 @@ const RestaurantMenu = () => {
     return orders.some(order => order._id === menuItem._id);
   };
 
+  const handleCategoryChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedCategories([...selectedCategories, value]);
+    } else {
+      setSelectedCategories(selectedCategories.filter(cat => cat !== value));
+    }
+  };
+
+  const filteredDishes = selectedCategories.length > 0
+    ? restaurant.dishes.filter(dish => selectedCategories.includes(dish.category._id))
+    : restaurant.dishes;
+
   if (loading) {
     return <div className="loading-container">Loading...</div>;
   }
@@ -53,11 +66,13 @@ const RestaurantMenu = () => {
     return <div>No restaurant data</div>;
   }
 
+  const uniqueCategories = [...new Set(restaurant.dishes.map(dish => JSON.stringify(dish.category)))].map(category => JSON.parse(category));
+
   return (
     <>
       <header>
         <div className='header-content'>
-        <Link to={`/restaurant/${restaurant._id}`}>Назад</Link>
+          <Link to={`/restaurant/${restaurant._id}`}>Назад</Link>
           <div className='header_logo'>
             <img src={restaurant.logo} alt={`${restaurant.title}`} />
           </div>
@@ -68,9 +83,9 @@ const RestaurantMenu = () => {
           <div><img src={instagram} alt='instagram' /></div>
         </div>
         <div className='my-orders'>
-            <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
-            <img src={heartVector} alt='heart' className="heart-icon" />
-          </div>
+          <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
+          <img src={heartVector} alt='heart' className="heart-icon" />
+        </div>
       </header>
 
       <div className='title_menu'>
@@ -78,8 +93,23 @@ const RestaurantMenu = () => {
         <h1>{restaurant.title}</h1>
       </div>
 
+      <div className='filter_categories'>
+        {uniqueCategories.map(category => (
+          <div key={category._id} className='category_item'>
+            <input
+              type='checkbox'
+              value={category._id}
+              id={category._id}
+              onChange={handleCategoryChange}
+              className='category_checkbox'
+            />
+            <label htmlFor={category._id} className='category_label'>{category.name}</label>
+          </div>
+        ))}
+      </div>
+
       <div className='restaurant-menu'>
-        {restaurant.dishes.map((menuItem, index) => (
+        {filteredDishes.map((menuItem, index) => (
           <div key={index} className='card_menu'>
             <div className='menu-item-image'>
               <img src={menuItem.image} alt={menuItem.title} />
@@ -104,7 +134,7 @@ const RestaurantMenu = () => {
         ))}
       </div>
 
-    <Footer/>
+      <Footer />
 
       {modalVisible && (
         <div className='modals'>
