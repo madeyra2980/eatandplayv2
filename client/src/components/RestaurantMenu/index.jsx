@@ -25,6 +25,7 @@ const RestaurantMenu = () => {
 
   useEffect(() => {
     getFetchDataRestaurant(id);
+    window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
 
   const showModal = (title, description, image, price) => {

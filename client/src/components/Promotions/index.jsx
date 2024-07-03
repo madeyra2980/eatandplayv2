@@ -17,6 +17,7 @@ const Promotions = () => {
 
   useEffect(() => {
     getFetchDataRestaurant(id);
+    window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
 
   if (loading) {

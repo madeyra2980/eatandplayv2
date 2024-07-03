@@ -13,6 +13,8 @@ const Institution = () => {
 
   useEffect(() => {
     getFetchPreferences();
+    window.scrollTo(0, 0);
+
   }, [getFetchPreferences]);
 
   const handlePreferenceChange = (event) => {

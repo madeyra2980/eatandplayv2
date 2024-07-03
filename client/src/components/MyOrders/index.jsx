@@ -26,6 +26,7 @@ const MyOrders = () => {
       console.log('Загрузка данных ресторана для id:', id);
       getFetchDataRestaurant(id);
     }
+    window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
 
   useEffect(() => {

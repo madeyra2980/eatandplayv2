@@ -25,6 +25,7 @@ const RestaurantGames = () => {
 
   useEffect(() => {
     getFetchDataRestaurant(id);
+    window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
 
   const openBootleModal = () => {
