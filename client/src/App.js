@@ -24,7 +24,7 @@ const App = () => {
             <Route path="/games/:id" element={<RestaurantGames />} />
             <Route path="/my-orders/:id" element={<MyOrders />} />
             <Route path='/promotions/:id' element={<Promotions/>} />
-            <Route path='/tooures/:id' element={<Tooures/>}/>
+            {/* <Route path='/tooures/:id' element={<Tooures/>}/> */}
         </Routes>
       </Router>
     </RestaurantsProvider>

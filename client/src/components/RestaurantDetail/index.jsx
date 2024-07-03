@@ -7,7 +7,7 @@ import phonesecond from '../../assets/phone2.png';
 import image1 from '../../assets/image1.png';
 import pasta from '../../assets/pastavtrlke.png';
 import timeclock from '../../assets/time.png';
-import Vector14 from '../../assets/Vector14.png'; 
+import Vector14 from '../../assets/Vector14.png';
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
@@ -16,7 +16,7 @@ import Footer from '../Footer'
 const RestaurantDetail = () => {
   const { id } = useParams();
   const { restaurant, getFetchDataRestaurant } = useRestaurants();
-  const [menuOpen, setMenuOpen] = useState(false); 
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
@@ -53,9 +53,9 @@ const RestaurantDetail = () => {
       <main>
         <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
           <div className='burger-nav-header'>
-            <Link style={{textDecoration:"none"}} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
+            <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
             <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
-            </div>
+          </div>
           <Link to={`/restaurant/${id}/menu`} onClick={toggleMenu}>Меню</Link>
           <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
           <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
@@ -64,8 +64,8 @@ const RestaurantDetail = () => {
           <div className='social-networks '>
             <div className='phone-number'>{restaurant.phoneNumber}</div>
             <div className='d0flex'>
-            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
-            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
+              <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
+              <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
             </div>
             <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
             <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
@@ -83,12 +83,16 @@ const RestaurantDetail = () => {
           <Link to={`/restaurant/${id}/menu`}><div className='item_block'><span>Меню</span><img src={pasta} alt="pasta" /></div></Link>
           <Link to={`/games/${id}`}><div className='item_block'><span>Игры на компанию</span><img src={phone} alt="phone" /></div></Link>
           <Link to={`/promotions/${id}`}><div className='item_block'><span>Акции и скидки</span><img src={phonesecond} alt="phone" /></div></Link>
-          <Link to={`/tooures/${id}`}><div className='item_block'><span>ЗD тур</span> <img src={image1} alt="phone" /></div></Link>
-        </div>
+          <a href={restaurant.tooures} target="_blank" rel="noopener noreferrer">
+            <div className='item_block'>
+              <span>ЗD тур</span>
+              <img src={image1} alt="phone" />
+            </div>
+          </a>        </div>
       </main>
 
       <footer>
-      <Footer/>
+        <Footer />
       </footer>
     </div>
   );
