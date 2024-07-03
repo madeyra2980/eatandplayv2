@@ -8,6 +8,8 @@ import RestaurantMenu from './components/RestaurantMenu';
 import MyOrders from './components/MyOrders';
 import { OrdersProvider } from './Context/OrdersProvider';
 import RestaurantGames from './components/RestaurantGames';
+import Promotions from './components/Promotions';
+import Tooures from './components/Tooures';
 
 const App = () => {
   return (
@@ -21,10 +23,13 @@ const App = () => {
             <Route path="/restaurant/:id/menu" element={<RestaurantMenu />} />
             <Route path="/games/:id" element={<RestaurantGames />} />
             <Route path="/my-orders/:id" element={<MyOrders />} />
+            <Route path='/promotions/:id' element={<Promotions/>} />
+            <Route path='/tooures/:id' element={<Tooures/>}/>
         </Routes>
       </Router>
-      </RestaurantsProvider>
-    </OrdersProvider>
+    </RestaurantsProvider>
+  </OrdersProvider>
+
   );
 };
 

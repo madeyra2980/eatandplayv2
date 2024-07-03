@@ -1,111 +1,113 @@
 .main_block_institutions {
-  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
   gap: 20px;
   margin: 0 auto;
-  display: flex;
-  width: 80%;
 }
 
-.restaurants_items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+.filter_preference_title img{
+    cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
 .filter_preference {
-  height: auto;
-  background-color: #565656;
-  padding: 20px 10px;
-  border-radius: 20px;
-  margin-right: 20px;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 12px;
+  top: 20px;
+  z-index: 1000;
+  display: block;
+  animation: slideDown 0.5s ease-out forwards;
+  overflow: scroll; 
+  height: 200px;
 }
-
 .filter_preference p {
-  margin-bottom: 20px;
-  margin-left: 10px;
-  color: white;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
 
 .filter_preference div {
   margin-bottom: 10px;
 }
 
-.filter_preference input {
+.filter_preference input[type="checkbox"] {
   margin-right: 10px;
 }
 
-.filter_preference label {
-  color: white;
-}
-
-.search_input {
+.filter_preference input[type="text"] {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 20px;
   border: none;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+}
+
+.filter_preference label {
+  color: #ddd; 
+  cursor: pointer;
+}
+
+
+.search_input{
+  border-radius: 12px;
+  padding: 20px 15px;
+  background-color: #565656;
+  border: none;
+  color: white;
+}
+input::placeholder {
+  color: white;
+  opacity: .7; 
+}
+.restaurant_card_item {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .institution_card {
-  background-color: #494949;
-  border-radius: 15px;
-  overflow: hidden;
+  display: block;
   text-decoration: none;
-  color: white;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.institution_card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: inherit; 
 }
 
 .image_container {
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .institution_image {
   width: 100%;
-  height: 200px;
+  height: 200px; 
   object-fit: cover;
 }
 
 .title_restaurant {
   position: absolute;
+  width: 100%;
+  bottom: 10px;
+  left: 0;
   text-align: center;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 10px;
-  bottom: 0;
-  right: 0;
-  text-decoration: underline;
-  font-family: "Raleway", sans-serif;
-  background-color: rgba(148, 148, 148, 0.6);
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  border-radius: 0 0 10px 10px;
 }
 
-.filter_categories {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  background-color: #565656;
-  border-radius: 20px;
-  margin-bottom: 20px;
-}
-
-.category_item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.category_checkbox {
-  accent-color: #494949;
-}
-
-.category_label {
-  color: white;
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    }
 }

@@ -16,7 +16,8 @@ const RestaurantForm = () => {
     oClock: '',
     address: '',
     phoneNumber: '',
-    promotions: []
+    promotions: [],
+    tooures:''
   });
 
   useEffect(() => {
@@ -108,7 +109,7 @@ const RestaurantForm = () => {
       formData.append('address', restaurantData.address);
       formData.append('phoneNumber', restaurantData.phoneNumber);
       formData.append('promotions', JSON.stringify(restaurantData.promotions.map(({ description }) => ({ description }))));
-
+      formData.append('tooures', restaurantData.tooures)
       restaurantData.promotions.forEach(({ image }, index) => {
         if (image) {
           formData.append(`promotionImages`, image);
@@ -127,7 +128,9 @@ const RestaurantForm = () => {
         oClock: restaurantData.oClock,
         address: restaurantData.address,
         phoneNumber: restaurantData.phoneNumber,
-        promotions: restaurantData.promotions
+        promotions: restaurantData.promotions,
+        tooures: restaurantData.tooures,
+
       });
 
       const response = await fetch('http://localhost:8080/restaurants', {
@@ -157,7 +160,8 @@ const RestaurantForm = () => {
         oClock: '',
         address: '',
         phoneNumber: '',
-        promotions: []
+        promotions: [],
+        tooures:''
       });
 
       alert('Ресторан успешно создан!');
@@ -281,6 +285,16 @@ const RestaurantForm = () => {
             type="text"
             name="phoneNumber"
             value={restaurantData.phoneNumber}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Создать тур:
+          <input
+            type="text"
+            name="tooures"
+            value={restaurantData.tooures}
             onChange={handleInputChange}
             required
           />

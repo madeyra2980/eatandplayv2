@@ -11,6 +11,8 @@ import Bottle from '../../assets/bottle.png';
 import './RestaurantGames.css';
 import Bootle from '../Games/Bootle';
 import QuizApp from '../Games/QuizApp';
+import Vector14 from '../../assets/Vector14.png';
+import Footer from '../Footer'
 
 Modal.setAppElement('#root');
 
@@ -19,6 +21,7 @@ const RestaurantGames = () => {
   const { restaurant, loading, getFetchDataRestaurant } = useRestaurants();
   const [isBootleModalOpen, setBootleModalOpen] = useState(false);
   const [isQuizAppModalOpen, setQuizAppModalOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
@@ -40,6 +43,10 @@ const RestaurantGames = () => {
     setQuizAppModalOpen(false);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   if (loading) {
     return <div>Загрузка</div>;
   }
@@ -48,20 +55,20 @@ const RestaurantGames = () => {
     <div className='games'>
       <header>
         <div className='header-content'>
-        <Link to={`/restaurant/${restaurant._id}`}>Назад</Link>
-          <div className='header_logo'>
-            <img src={restaurant.logo} alt={`${restaurant.title}`} />
+          <div className='left-item'>
+            <div className='header_logo'>
+              <img src={restaurant.logo} alt={`${restaurant.title}`} />
+            </div>
+            <div className='info-block'>
+              <img src={timeclock} alt='time' /> {restaurant.oClock}
+            </div>
           </div>
-          <div className='info-block'><img src={timeclock} alt='time' /> 12:00-01:00</div>
-          <div className='info-block'><img src={location} alt='location' /> БЦ «ERTIS», Абая 99B, 3 этаж</div>
-          <div className='info-block info-block-green'><span>Позвонить</span></div>
-          <div><img src={whatsapp} alt='whatsapp' /></div>
-          <div><img src={instagram} alt='instagram' /></div>
+          <div className='right-item'>
+            <div className='burger-menu' onClick={toggleMenu}>
+              <img src={Vector14} alt="Меню" />
+            </div>
+          </div>
         </div>
-        <div className='my-orders'>
-            <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
-            <img src={heartVector} alt='heart' className="heart-icon" />
-          </div>
       </header>
 
       <div className='title_menu'>
@@ -69,6 +76,26 @@ const RestaurantGames = () => {
         <h1>{restaurant.title}</h1>
       </div>
 
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+        <div className='burger-nav-header'>
+          <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
+          <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
+        </div>
+        <Link to={`/restaurant/${id}/menu`} onClick={toggleMenu}>Меню</Link>
+        <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
+        <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
+        <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
+        <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+        <div className='social-networks '>
+          <div className='phone-number'>{restaurant.phoneNumber}</div>
+          <div className='d0flex'>
+            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
+            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
+          </div>
+          <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
+          <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
+        </div>
+      </div>
       <div className='restaurant-games'>
         <div className='card_menu_game' onClick={openBootleModal}>
           <img src={Bottle} alt="" />
@@ -78,8 +105,8 @@ const RestaurantGames = () => {
           <img src={Bottle} alt="" />
           <p>Игра какая то</p>
         </div>
+        
       </div>
-
       <Modal
         isOpen={isBootleModalOpen}
         onRequestClose={closeBootleModal}
@@ -91,7 +118,6 @@ const RestaurantGames = () => {
           <Bootle />
         </div>
       </Modal>
-
       <Modal
         isOpen={isQuizAppModalOpen}
         onRequestClose={closeQuizAppModal}
@@ -104,6 +130,14 @@ const RestaurantGames = () => {
         </div>
       </Modal>
 
+      <Link style={{ textDecoration: "none" }} to={`/restaurant/${restaurant._id}/`}>
+        <div className='btn-backto-page'>
+          Назад
+        </div>
+      </Link>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

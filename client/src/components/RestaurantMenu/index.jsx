@@ -8,8 +8,10 @@ import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
 import heartVector from '../../assets/Vector.png';
 import heartIconBtn from '../../assets/hearticonbtn.png';
-import Footer from '../Footer';
 import './RestaurantMenu.css';
+import Vector14 from '../../assets/Vector14.png';
+import Filter from '../../assets/filter.png';
+import Footer from '../Footer'
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -18,6 +20,8 @@ const RestaurantMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', description: '', image: '', price: '' });
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
@@ -51,49 +55,78 @@ const RestaurantMenu = () => {
   };
 
   const filteredDishes = selectedCategories.length > 0
-    ? restaurant.dishes.filter(dish => selectedCategories.includes(dish.category._id))
-    : restaurant.dishes;
+    ? restaurant?.dishes.filter(dish => selectedCategories.includes(dish.category._id))
+    : restaurant?.dishes || [];
 
   if (loading) {
-    return <div className="loading-container">Loading...</div>;
+    return <div className="loading-container">Загрузка...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Ошибка: {error}</div>;
   }
 
   if (!restaurant) {
-    return <div>No restaurant data</div>;
+    return <div>Нету ресторанов</div>;
   }
 
   const uniqueCategories = [...new Set(restaurant.dishes.map(dish => JSON.stringify(dish.category)))].map(category => JSON.parse(category));
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleFilter = () => {
+    if (filterOpen) {
+      setFilterOpen(false);
+    } else {
+      setFilterOpen(true);
+    }
+  };
 
   return (
     <>
       <header>
         <div className='header-content'>
-          <Link to={`/restaurant/${restaurant._id}`}>Назад</Link>
-          <div className='header_logo'>
-            <img src={restaurant.logo} alt={`${restaurant.title}`} />
+          <div className='left-item'>
+            <div className='header_logo'>
+              <img src={restaurant.logo} alt={`${restaurant.title}`} />
+            </div>
+            <div className='info-block'>
+              <img src={timeclock} alt='time' /> {restaurant.oClock}
+            </div>
           </div>
-          <div className='info-block'><img src={timeclock} alt='time' /> 12:00-01:00</div>
-          <div className='info-block'><img src={location} alt='location' /> БЦ «ERTIS», Абая 99B, 3 этаж</div>
-          <div className='info-block info-block-green'><span>Позвонить</span></div>
-          <div><img src={whatsapp} alt='whatsapp' /></div>
-          <div><img src={instagram} alt='instagram' /></div>
-        </div>
-        <div className='my-orders'>
-          <Link to={`/my-orders/${restaurant._id}`} className="my-orders-link">Мой заказ</Link>
-          <img src={heartVector} alt='heart' className="heart-icon" />
+          <div className='right-item'>
+            <div className='burger-menu' onClick={toggleMenu}>
+              <img src={Vector14} alt="Меню" />
+            </div>
+          </div>
         </div>
       </header>
 
-      <div className='title_menu'>
-        <h1>Меню</h1>
-        <h1>{restaurant.title}</h1>
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+        <div className='burger-nav-header'>
+          <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
+          <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
+        </div>
+        <Link to={`/restaurant/${id}/menu`} onClick={toggleMenu}>Меню</Link>
+        <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
+        <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
+        <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
+        <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+        <div className='social-networks '>
+          <div className='phone-number'>{restaurant.phoneNumber}</div>
+          <div className='d0flex'>
+            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
+            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
+          </div>
+          <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
+          <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
+        </div>
       </div>
+      <div className='title_menu'>
 
-      <div className='filter_categories'>
+        <h1>Меню</h1>
+        <span onClick={toggleFilter} className='filter_item'>Фильтр <img src={Filter} alt="" /></span>
+      </div>
+      <div className={`filter_categories ${filterOpen ? 'filter_categoriesOpen' : 'filter_categoriesClose'}`}>
         {uniqueCategories.map(category => (
           <div key={category._id} className='category_item'>
             <input
@@ -134,8 +167,6 @@ const RestaurantMenu = () => {
         ))}
       </div>
 
-      <Footer />
-
       {modalVisible && (
         <div className='modals'>
           <div className='modal-contents'>
@@ -147,6 +178,16 @@ const RestaurantMenu = () => {
           </div>
         </div>
       )}
+
+      <Link style={{textDecoration:"none"}}  to={`/my-orders/${restaurant._id}`}>
+      <div className='btn-backto-page'>
+        Мои заказы
+      </div>
+      </Link>
+
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

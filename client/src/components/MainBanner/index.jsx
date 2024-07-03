@@ -19,8 +19,10 @@ const Main = () => {
                     <img src={shashki} alt="" />
                 </div>
                 <div className='header_banner'>
+                    <div className='banner_titles'>
                     <h1>EAT&PLAY</h1>
                     <p>Сервис по поиску заведений <span>подходящего под ваш запрос <img src={lupa} alt="" /> </span></p>
+                    </div>
                     <div className='header_items'>
                         <div className='header_items_card'>
                             <img src={menu} alt="" />

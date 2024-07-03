@@ -1,0 +1,35 @@
+
+  .info-block {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  
+  .promotions-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1fr));
+    gap: 20px;
+    max-width: 90%;
+    margin: auto;
+  }
+  
+  .promotion-card {
+    border-radius: 8px;
+    background-color: #494949;
+  }
+  
+  .promotion-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .promotion-text {
+    margin-top: 10px;
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+    height: 200px;
+    overflow: scroll;
+  }
+  

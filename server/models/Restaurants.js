@@ -18,7 +18,8 @@ const RestaurantSchema = new Schema({
   oClock: { type: String, required: true },
   address: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  promotions: [PromotionSchema]
+  promotions: [PromotionSchema],
+  tooures:{ type: String, required: true }
 });
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema);

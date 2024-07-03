@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import './RestaurantDetail.css';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useRestaurants } from '../../Context/APIcontext';
-import phone from '../../assets/phone1.png';
-import phonesecond from '../../assets/phone2.png';
-import image1 from '../../assets/image1.png';
-import pasta from '../../assets/pastavtrlke.png';
 import timeclock from '../../assets/time.png';
-import Vector14 from '../../assets/Vector14.png'; 
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
-import Footer from '../Footer'
+import heartVector from '../../assets/Vector.png';
+import './Promotions.css'; 
+import Vector14 from '../../assets/Vector14.png'; 
+import Footer from '../Footer';
 
-const RestaurantDetail = () => {
+const Promotions = () => {
   const { id } = useParams();
-  const { restaurant, getFetchDataRestaurant } = useRestaurants();
+  const { restaurant, loading, getFetchDataRestaurant } = useRestaurants();
   const [menuOpen, setMenuOpen] = useState(false); 
 
   useEffect(() => {
     getFetchDataRestaurant(id);
   }, [id, getFetchDataRestaurant]);
 
-  if (!restaurant) {
-    return <div>Загрузка!</div>;
+  if (loading) {
+    return <div>Загрузка...</div>;
   }
 
+  if (!restaurant) {
+    return <div>Нет данных о ресторане</div>;
+  }
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
   return (
-    <div className='restaurant-detail'>
-      <header>
+    <div className="promotions">
+     <header>
         <div className='header-content'>
           <div className='left-item'>
             <div className='header_logo'>
@@ -49,8 +48,8 @@ const RestaurantDetail = () => {
           </div>
         </div>
       </header>
-      <main>
-        <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+      
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
           <div className='burger-nav-header'>
             <Link style={{textDecoration:"none"}} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
             <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
@@ -60,6 +59,7 @@ const RestaurantDetail = () => {
           <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
           <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
           <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+
           <div className='social-networks '>
             <div className='phone-number'>{restaurant.phoneNumber}</div>
             <div className='d0flex'>
@@ -71,26 +71,30 @@ const RestaurantDetail = () => {
           </div>
         </div>
 
-        <div className='banner-restaurant'>
-          <img src={restaurant.banner} alt={`${restaurant.title} banner`} />
-          <div className='banner-text'>
-            <h1>{restaurant.title}</h1>
-            <p>{restaurant.description}</p>
-          </div>
-        </div>
-        <div className='items_block'>
-          <Link to={`/restaurant/${id}/menu`}><div className='item_block'><span>Меню</span><img src={pasta} alt="pasta" /></div></Link>
-          <Link to={`/games/${id}`}><div className='item_block'><span>Игры на компанию</span><img src={phone} alt="phone" /></div></Link>
-          <Link to={`/promotions/${id}`}><div className='item_block'><span>Акции и скидки</span><img src={phonesecond} alt="phone" /></div></Link>
-          <Link to={`/tooures/${id}`}><div className='item_block'><span>ЗD тур</span> <img src={image1} alt="phone" /></div></Link>
-        </div>
-      </main>
+      <div className='title_menu'>
+        <h1>Акции и Скидки</h1>
+        <h1>{restaurant.title}</h1>
+      </div>
 
-      <footer>
+      <div className='promotions-cards'>
+        {restaurant.promotions && restaurant.promotions.map((promotion, index) => (
+          <div key={index} className='promotion-card'>
+            <img src={promotion.image} alt="Discount" className='promotion-image' />
+            
+            <p className='promotion-text'>{promotion.description}</p>
+          </div>
+        ))}
+      </div>
+      <Link style={{textDecoration:"none"}}  to={`/restaurant/${restaurant._id}/`}>
+      <div className='btn-backto-page'>
+      Назад     
+       </div>
+      </Link>
+        <footer>
       <Footer/>
       </footer>
     </div>
   );
-};
+}
 
-export default RestaurantDetail;
+export default Promotions;

@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useRestaurants } from '../../Context/APIcontext';
 import './institution.css';
+import Filter from '../../assets/filter.png';
 
 const Institution = () => {
   const { restaurants, preferences, getFetchPreferences } = useRestaurants();
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterPreferenceOpen, setFilterPreferenceOpen] = useState(false)
+  console.log(filterPreferenceOpen); // Добавьте это в ваш компонент для отладки
 
   useEffect(() => {
     getFetchPreferences();
@@ -21,9 +24,8 @@ const Institution = () => {
     }
   };
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value.toLowerCase());
-  };
+  const handleSearchChange = (event) => setSearchTerm(event.target.value.toLowerCase());
+  const openFilterPreference = () => setFilterPreferenceOpen(!filterPreferenceOpen)
 
   const filteredRestaurants = restaurants.filter(restaurant => {
     const matchesPreferences = selectedPreferences.length === 0 || selectedPreferences.every(pref => restaurant.preferences.some(p => p._id === pref));
@@ -33,8 +35,11 @@ const Institution = () => {
 
   return (
     <div className='main_block_institutions'>
-      <div className='filter_preference'>
-        <p>Предпочтения</p>
+      <div className='filter_preference_title'>
+      <span>Выбор заведений <img onClick={openFilterPreference} src={Filter} alt="" /></span>
+      </div>
+      <div className={`${filterPreferenceOpen ? "filter_preference" : "hidden"}`}>
+      <p>Предпочтения</p>
         {preferences.map(preference => (
           <div key={preference._id}>
             <input
@@ -46,16 +51,17 @@ const Institution = () => {
             <label htmlFor={preference._id}>{preference.preferenceName}</label>
           </div>
         ))}
-        <input
+       
+      </div>
+      <input
           type='text'
           placeholder='Поиск ресторана'
           value={searchTerm}
           onChange={handleSearchChange}
           className='search_input'
         />
-      </div>
-
-      <div className='restaurants_items'>
+        <div className='restaurant_card_item'>
+        
         {filteredRestaurants.map((restaurant) => (
           <Link to={`/restaurant/${restaurant._id}`} key={restaurant._id} className='institution_card'>
             <div className='image_container'>
@@ -64,8 +70,8 @@ const Institution = () => {
             </div>
           </Link>
         ))}
+        </div>
       </div>
-    </div>
   );
 };
 

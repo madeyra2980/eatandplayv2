@@ -40,8 +40,8 @@ router.post(
   ]),
   async (req, res) => {
     try {
-      const { title, description, dishes, preferenceName, instagram, whatsapp, oClock, address, phoneNumber, promotions } = req.body; 
-      if (!title || !description || !dishes || !preferenceName || !instagram || !whatsapp || !oClock || !address || !phoneNumber || !promotions) {
+      const { title, description, dishes, preferenceName, instagram, whatsapp, oClock, address, phoneNumber, promotions,tooures } = req.body; 
+      if (!title || !description || !dishes || !preferenceName || !instagram || !whatsapp || !oClock || !address || !phoneNumber || !promotions || !tooures) {
         return res
           .status(400)
           .json({ error: "Не все обязательные поля заполнены" });
@@ -69,7 +69,8 @@ router.post(
         oClock,
         address,
         phoneNumber,
-        promotions: promotionsArray
+        promotions: promotionsArray,
+        tooures
       });
 
       const savedRestaurant = await newRestaurant.save();
