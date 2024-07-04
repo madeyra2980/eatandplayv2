@@ -7,7 +7,7 @@ const multer = require('multer');
 const path = require('path');
 
 
-const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+const BASE_URL = 'http://eatandplayv2.onrender.com'
 
 
 mongoose.connect(process.env.MONGO_DB , { 
