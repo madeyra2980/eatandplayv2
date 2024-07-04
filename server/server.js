@@ -11,8 +11,6 @@ const DB = process.env.MONGO_DB + '&ssl=true';
 mongoose.connect(DB, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    ssl: true,
-    sslValidate: true,
 });
 const db = mongoose.connection;
 db.on('error', (err) => {
