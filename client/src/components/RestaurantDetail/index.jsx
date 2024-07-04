@@ -88,7 +88,8 @@ const RestaurantDetail = () => {
               <span>ЗD тур</span>
               <img src={image1} alt="phone" />
             </div>
-          </a>        </div>
+          </a>        
+          </div>
       </main>
 
       <footer>

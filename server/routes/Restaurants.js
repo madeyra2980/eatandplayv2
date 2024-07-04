@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // Лимит размера файла (5MB)
+  limits: { fileSize: 1024 * 1024 * 20 },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith("image")) {
       cb(null, true);
@@ -234,7 +234,6 @@ router.post("/:id/preferences", async (req, res) => {
       return res.status(404).json({ error: "Ресторан или предпочтение не найдено" });
     }
 
-    // Проверка на дублирование предпочтения
     if (restaurant.preferences.includes(preferenceId)) {
       return res.status(400).json({ error: "Предпочтение уже добавлено в ресторан" });
     }
@@ -249,7 +248,6 @@ router.post("/:id/preferences", async (req, res) => {
   }
 });
 
-// Маршрут для удаления предпочтений из ресторана
 router.delete("/:restaurantId/preferences/:preferenceId", async (req, res) => {
   const { restaurantId, preferenceId } = req.params;
 
