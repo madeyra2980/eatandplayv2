@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3003;
 
 mongoose.connect(process.env.MONGO_DB , { 
     useNewUrlParser: true, 
-    useUnifiedTopology: true,
+    useUnifiedTopology: true,    
+    ssl: true,
+    sslValidate: true,
 });
 const db = mongoose.connection;
 db.on('error', (err) => {
