@@ -8,7 +8,12 @@ const path = require('path');
 const PORT = process.env.PORT || 3003;
 const DB = process.env.MONGO_DB;
 
-mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    ssl: true, 
+    tlsAllowInvalidCertificates: true
+});
 const db = mongoose.connection;
 db.on('error', (err) => {
     console.error('Ошибка при подключении к MongoDB:', err);
