@@ -13,7 +13,7 @@ const AddPreference = () => {
     event.preventDefault(); 
   
     try {
-      const response = await fetch('http://localhost:8080/preference', {
+      const response = await fetch('http://eatandplayv2.onrender.com/preference', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

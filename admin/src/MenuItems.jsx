@@ -15,7 +15,7 @@ const MenuItems = () => {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch('http://localhost:8080/dishes');
+        const response = await fetch('http://eatandplayv2.onrender.com/dishes');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -28,7 +28,7 @@ const MenuItems = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8080/categories');
+        const response = await fetch('http://eatandplayv2.onrender.com/categories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -57,7 +57,7 @@ const MenuItems = () => {
 
   const updateMenuItem = async (id, updatedData) => {
     try {
-      const response = await fetch(`http://localhost:8080/dishes/${id}`, {
+      const response = await fetch(`http://eatandplayv2.onrender.com/dishes/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const MenuItems = () => {
   };
   const deleteMenuItem = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/dishes/${id}`, {
+      const response = await fetch(`http://eatandplayv2.onrender.com/dishes/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

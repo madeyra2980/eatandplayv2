@@ -9,7 +9,7 @@ const Institution = () => {
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterPreferenceOpen, setFilterPreferenceOpen] = useState(false)
-  console.log(filterPreferenceOpen); // Добавьте это в ваш компонент для отладки
+  
 
   useEffect(() => {
     getFetchPreferences();
