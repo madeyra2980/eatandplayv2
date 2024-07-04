@@ -6,15 +6,9 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 
-const PORT = process.env.PORT || 3003;
-
-mongoose.connect(process.env.MONGO_DB || 'mongodb+srv://askarovmadyar:Zxcvbnm@cluster0.vbht9au.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tls=true', { 
+mongoose.connect(process.env.MONGO_DB , { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    tls: true,
-    tlsAllowInvalidCertificates: false, // Замените на true, если хотите разрешить недействительные сертификаты
-    tlsInsecure: false, // Убедитесь, что этот параметр установлен в false для более строгой проверки
-    // tlsCAFile: 'path/to/your/ca-certificate.pem', // Укажите путь к вашему CA-сертификату, если требуется
 });
 const db = mongoose.connection;
 db.on('error', (err) => {
@@ -66,7 +60,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
+        image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`,
     });
 });
 
@@ -77,6 +71,6 @@ app.use('/dishes', dishRoutes);
 app.use('/categories', Categories);
 app.use('/preference', PreferenceRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Сервер работает на порту ${PORT}`);
+app.listen(process.env.PORT||4444, () => {
+    console.log(`Сервер работает на порту ${process.env.PORT}`);
 });
