@@ -5,13 +5,16 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+
 const PORT = process.env.PORT || 3003;
 
-mongoose.connect(process.env.MONGO_DB , { 
+mongoose.connect(process.env.MONGO_DB || 'mongodb+srv://askarovmadyar:Zxcvbnm@cluster0.vbht9au.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tls=true', { 
     useNewUrlParser: true, 
-    useUnifiedTopology: true,    
+    useUnifiedTopology: true,
     tls: true,
-    tlsAllowInvalidCertificates: true, 
+    tlsAllowInvalidCertificates: false, // Замените на true, если хотите разрешить недействительные сертификаты
+    tlsInsecure: false, // Убедитесь, что этот параметр установлен в false для более строгой проверки
+    // tlsCAFile: 'path/to/your/ca-certificate.pem', // Укажите путь к вашему CA-сертификату, если требуется
 });
 const db = mongoose.connection;
 db.on('error', (err) => {
