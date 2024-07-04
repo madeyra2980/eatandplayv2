@@ -6,9 +6,8 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const PORT = process.env.PORT || 3003;
-const DB = process.env.MONGO_DB 
 
-mongoose.connect(DB, { 
+mongoose.connect(process.env.MONGO_DB , { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
 });
