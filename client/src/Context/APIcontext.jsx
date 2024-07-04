@@ -15,7 +15,7 @@ export const RestaurantsProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('http://eatandplayv2.onrender.com/restaurants');
+        const response = await fetch('https://eatandplayv2.onrender.com/categories/restaurants');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -37,7 +37,7 @@ export const RestaurantsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://eatandplayv2.onrender.com/preference');
+      const response = await fetch('https://eatandplayv2.onrender.com/categories/preference');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -60,7 +60,7 @@ export const RestaurantsProvider = ({ children }) => {
         setRestaurant(cachedData);
         console.log('Using cached data for restaurant:', cachedData);
       } else {
-        const response = await fetch(`http://eatandplayv2.onrender.com/restaurants/${id}`);
+        const response = await fetch(`https://eatandplayv2.onrender.com/categories/restaurants/${id}`);
         console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');

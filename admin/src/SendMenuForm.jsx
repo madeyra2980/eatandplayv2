@@ -16,7 +16,7 @@ const MenuForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://eatandplayv2.onrender.com/categories');
+        const response = await fetch('https://eatandplayv2.onrender.com/categories/categories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -64,7 +64,7 @@ const MenuForm = () => {
       formData.append('category', inputValues.category);
       formData.append('image', inputValues.image);
 
-      const response = await fetch('http://eatandplayv2.onrender.com/dishes', {
+      const response = await fetch('https://eatandplayv2.onrender.com/categories/dishes', {
         method: 'POST',
         body: formData,
       });

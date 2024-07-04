@@ -24,8 +24,8 @@ const RestaurantForm = () => {
     const fetchData = async () => {
       try {
         const [dishesResponse, preferencesResponse] = await Promise.all([
-          fetch('http://eatandplayv2.onrender.com/dishes'),
-          fetch('http://eatandplayv2.onrender.com/preference')
+          fetch('https://eatandplayv2.onrender.com/categories/dishes'),
+          fetch('https://eatandplayv2.onrender.com/categories/preference')
         ]);
 
         if (!dishesResponse.ok || !preferencesResponse.ok) {
@@ -133,7 +133,7 @@ const RestaurantForm = () => {
 
       });
 
-      const response = await fetch('http://eatandplayv2.onrender.com/restaurants', {
+      const response = await fetch('https://eatandplayv2.onrender.com/categories/restaurants', {
         method: 'POST',
         body: formData,
       });

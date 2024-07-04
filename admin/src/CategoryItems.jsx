@@ -9,7 +9,7 @@ const CategoryItems = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://eatandplayv2.onrender.com/categories');
+        const response = await fetch('https://eatandplayv2.onrender.com/categories/categories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -25,7 +25,7 @@ const CategoryItems = () => {
 
   const handleUpdateCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://eatandplayv2.onrender.com/categories/${categoryId}`, {
+      const response = await fetch(`https://eatandplayv2.onrender.com/categories/categories/${categoryId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const CategoryItems = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://eatandplayv2.onrender.com/categories/${categoryId}`, {
+      const response = await fetch(`https://eatandplayv2.onrender.com/categories/categories/${categoryId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
