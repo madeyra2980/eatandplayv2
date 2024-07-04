@@ -6,6 +6,10 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 
+
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+
+
 mongoose.connect(process.env.MONGO_DB , { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -60,12 +64,11 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`,
+        image_url: `${BASE_URL}/images/${req.file.filename}`,
     });
 });
 
 app.use('/images', express.static('upload/images'));
-    
 app.use('/restaurants', restaurants);
 app.use('/dishes', dishRoutes);
 app.use('/categories', Categories);
