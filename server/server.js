@@ -7,10 +7,9 @@ const multer = require('multer');
 const path = require('path');
 
 
-const BASE_URL = 'http://eatandplayv2.onrender.com'
-// const LOCAL_URL = 'http://localhost:' 
+const BASE_URL = 'http://185.4.180.214/'
 
-mongoose.connect(process.env.MONGO_DB , { 
+mongoose.connect("mongodb+srv://askarovmadyar:Zxcvbnm@cluster0.vbht9au.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" , { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
 });
@@ -64,7 +63,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `http://localhost:/images/${req.file.filename}`,
+        image_url: `${BASE_URL}/images/${req.file.filename}`,
     });
 });
 
@@ -74,6 +73,6 @@ app.use('/dishes', dishRoutes);
 app.use('/categories', Categories);
 app.use('/preference', PreferenceRoutes);
 
-app.listen(process.env.PORT||4444, () => {
+app.listen(process.env.PORT || 4444, () => {
     console.log(`Сервер работает на порту ${process.env.PORT}`);
 });

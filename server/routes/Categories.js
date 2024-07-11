@@ -41,7 +41,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Удаление категории
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
 

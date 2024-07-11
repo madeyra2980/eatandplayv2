@@ -13,7 +13,7 @@ const AddPreference = () => {
     event.preventDefault(); 
   
     try {
-      const response = await fetch('http://localhost:4444/preference', {
+      const response = await fetch('http://185.4.180.214/preference', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
