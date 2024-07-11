@@ -9,7 +9,7 @@ const CategoryItems = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://185.4.180.214/categories');
+        const response = await fetch('http://185.4.180.214/4444/categories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -25,7 +25,7 @@ const CategoryItems = () => {
 
   const handleUpdateCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://185.4.180.214/categories/${categoryId}`, {
+      const response = await fetch(`http://185.4.180.214/4444/categories/${categoryId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const CategoryItems = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://185.4.180.214/categories/${categoryId}`, {
+      const response = await fetch(`http://185.4.180.214/4444/categories/${categoryId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

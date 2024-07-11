@@ -12,7 +12,7 @@ const RestaurantItems = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await fetch('http://185.4.180.214/restaurants');
+        const response = await fetch('http://185.4.180.214/4444/restaurants');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -29,7 +29,7 @@ const RestaurantItems = () => {
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const response = await fetch('http://185.4.180.214/dishes');
+        const response = await fetch('http://185.4.180.214/4444/dishes');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -46,7 +46,7 @@ const RestaurantItems = () => {
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
-        const response = await fetch('http://185.4.180.214/preference');
+        const response = await fetch('http://185.4.180.214/4444/preference');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -62,7 +62,7 @@ const RestaurantItems = () => {
 
   const deleteRestaurant = async (id) => {
     try {
-      const response = await fetch(`http://185.4.180.214/restaurants/${id}`, {
+      const response = await fetch(`http://185.4.180.214/4444/restaurants/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -86,13 +86,13 @@ const RestaurantItems = () => {
   const deleteDish = async () => {
     if (!selectedDishForDeletion.dishId || !selectedDishForDeletion.restaurantId) return;
     try {
-      const response = await fetch(`http://185.4.180.214/restaurants/${selectedDishForDeletion.restaurantId}/dishes/${selectedDishForDeletion.dishId}`, {
+      const response = await fetch(`http://185.4.180.214/4444/restaurants/${selectedDishForDeletion.restaurantId}/dishes/${selectedDishForDeletion.dishId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const updatedRestaurants = await fetch('http://185.4.180.214/restaurants/').then(res => res.json());
+      const updatedRestaurants = await fetch('http://185.4.180.214/4444/restaurants/').then(res => res.json());
       setRestaurants(updatedRestaurants);
       setSelectedDishForDeletion({ dishId: '', restaurantId: '' }); 
     } catch (error) {
@@ -103,7 +103,7 @@ const RestaurantItems = () => {
   const handleAddDish = async (event, restaurantId) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://185.4.180.214/restaurants/${restaurantId}/dishes`, {
+      const response = await fetch(`http://185.4.180.214/4444/restaurants/${restaurantId}/dishes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const RestaurantItems = () => {
   const handleAddPreference = async (event, restaurantId) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://185.4.180.214/restaurants/${restaurantId}/preferences`, {
+      const response = await fetch(`http://185.4.180.214/4444/restaurants/${restaurantId}/preferences`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -153,13 +153,13 @@ const RestaurantItems = () => {
   const deletePreference = async () => {
     if (!selectedPreferenceForDeletion.preferenceId || !selectedPreferenceForDeletion.restaurantId) return;
     try {
-      const response = await fetch(`http://185.4.180.214/${selectedPreferenceForDeletion.restaurantId}/preferences/${selectedPreferenceForDeletion.preferenceId}`, {
+      const response = await fetch(`http://185.4.180.214/4444/${selectedPreferenceForDeletion.restaurantId}/preferences/${selectedPreferenceForDeletion.preferenceId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const updatedRestaurants = await fetch('http://185.4.180.214/restaurants').then(res => res.json());
+      const updatedRestaurants = await fetch('http://185.4.180.214/4444/restaurants').then(res => res.json());
       setRestaurants(updatedRestaurants);
       setSelectedPreferenceForDeletion({ preferenceId: '', restaurantId: '' });
     } catch (error) {
