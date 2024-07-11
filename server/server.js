@@ -7,7 +7,7 @@ const multer = require('multer');
 const path = require('path');
 
 
-const BASE_URL = 'http://185.4.180.214/4444'
+const BASE_URL = 'http://185.4.180.214:4444'
 
 mongoose.connect("mongodb+srv://askarovmadyar:Zxcvbnm@cluster0.vbht9au.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" , { 
     useNewUrlParser: true, 

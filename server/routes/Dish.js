@@ -5,7 +5,7 @@ const Categories = require('../models/Categories');
 const multer = require('multer');
 const path = require('path');
 
-const BASE_URL = 'http://185.4.180.214/4444'
+const BASE_URL = 'http://185.4.180.214:4444'
 
 const storage = multer.diskStorage({
     destination: './upload/images',

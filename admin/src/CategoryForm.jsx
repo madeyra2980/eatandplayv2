@@ -13,7 +13,7 @@ const CategoryForm = () => {
     event.preventDefault(); // Предотвращаем перезагрузку страницы
 
     try {
-      const response = await fetch('http://185.4.180.214/4444/categories', {
+      const response = await fetch('http://185.4.180.214:4444/categories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

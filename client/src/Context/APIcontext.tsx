@@ -19,7 +19,7 @@ export const RestaurantsProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('http://185.4.180.214/4444/restaurants');
+        const response = await fetch('http://185.4.180.214:4444/restaurants');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -41,7 +41,7 @@ export const RestaurantsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://185.4.180.214/4444/preference');
+      const response = await fetch('http://185.4.180.214:4444/preference');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -64,7 +64,7 @@ export const RestaurantsProvider = ({ children }) => {
         setRestaurant(cachedData);
         console.log('Using cached data for restaurant:', cachedData);
       } else {
-        const response = await fetch(`http://185.4.180.214/4444/restaurants/${id}`);
+        const response = await fetch(`http://185.4.180.214:4444/restaurants/${id}`);
         console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');

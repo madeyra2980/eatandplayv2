@@ -16,7 +16,7 @@ const MenuForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://185.4.180.214/4444/categories');
+        const response = await fetch('http://185.4.180.214:4444/categories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -64,7 +64,7 @@ const MenuForm = () => {
       formData.append('category', inputValues.category);
       formData.append('image', inputValues.image);
 
-      const response = await fetch('http://185.4.180.214/4444/dishes', {
+      const response = await fetch('http://185.4.180.214:4444/dishes', {
         method: 'POST',
         body: formData,
       });
