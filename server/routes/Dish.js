@@ -4,9 +4,10 @@ const Dish = require('../models/Dish');
 const Categories = require('../models/Categories');
 const multer = require('multer');
 const path = require('path');
-const PORT = process.env.PORT || 3009;
+// const PORT = process.env.PORT;
 
 const BASE_URL = 'http://eatandplayv2.onrender.com'
+const LOCAL_URL = 'http://localhost:' + process.env.PORT
 
 const storage = multer.diskStorage({
     destination: './upload/images',
@@ -35,7 +36,7 @@ router.use('/images', express.static('upload/images'));
 router.post('/', upload.single('image'), async (req, res) => {
     try {
         const { title, description, category, cookingTime, price } = req.body;
-        const image_url = `${BASE_URL}/images/${req.file.filename}`;
+        const image_url = `${LOCAL_URL}/images/${req.file.filename}`;
         const existingCategory = await Categories.findById(category);
         if (!existingCategory) {
             return res.status(404).json({ error: 'Категория не найдена' });

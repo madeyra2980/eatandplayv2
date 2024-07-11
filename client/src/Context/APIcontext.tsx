@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 const RestaurantsContext = createContext();
 
+
 export const RestaurantsProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
@@ -10,12 +11,13 @@ export const RestaurantsProvider = ({ children }) => {
   const [restaurantsCache, setRestaurantsCache] = useState({});
   const [preferences, setPreferences] = useState([]);
 
+
   useEffect(() => {
     const fetchRestaurants = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('https://eatandplayv2.onrender.com/categories/restaurants');
+        const response = await fetch('http://localhost:4444/restaurants');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -37,7 +39,7 @@ export const RestaurantsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://eatandplayv2.onrender.com/categories/preference');
+      const response = await fetch('http://localhost:4444/preference');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -60,7 +62,7 @@ export const RestaurantsProvider = ({ children }) => {
         setRestaurant(cachedData);
         console.log('Using cached data for restaurant:', cachedData);
       } else {
-        const response = await fetch(`https://eatandplayv2.onrender.com/categories/restaurants/${id}`);
+        const response = await fetch(`http://localhost:4444/restaurants/${id}`);
         console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');

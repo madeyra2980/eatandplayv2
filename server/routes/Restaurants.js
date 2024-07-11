@@ -4,11 +4,10 @@ const Restaurant = require("../models/Restaurants");
 const Dish = require("../models/Dish");
 const multer = require("multer");
 const path = require("path");
-const PORT = process.env.PORT || 3009;
 const Preference = require('../models/Preference')
 
 const BASE_URL = 'http://eatandplayv2.onrender.com'
-
+const LOCAL_URL = 'http://localhost:' + process.env.PORT
 
 const storage = multer.diskStorage({
   destination: "./upload/images",
@@ -54,11 +53,11 @@ router.post(
       const preferencesArray = preferenceName.split(',').map(id => id.trim());
       const promotionsArray = JSON.parse(promotions).map((promotion, index) => ({
         description: promotion.description,
-        image: `${BASE_URL}/images/${req.files["promotionImages"][index].filename}`
+        image: `${LOCAL_URL}/images/${req.files["promotionImages"][index].filename}`
       }));
 
-      const logo_url = `${BASE_URL}/images/${req.files["logo"][0].filename}`;
-      const banner_url = `${BASE_URL}/images/${req.files["banner"][0].filename}`;
+      const logo_url = `${LOCAL_URL}/images/${req.files["logo"][0].filename}`;
+      const banner_url = `${LOCAL_URL}/images/${req.files["banner"][0].filename}`;
 
       const newRestaurant = new Restaurant({
         title,

@@ -49,3 +49,7 @@ table {
     width: 12px;  
     height: 12px; 
 }
+
+a{
+    text-decoration: none;
+}

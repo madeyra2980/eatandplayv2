@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useRestaurants } from '../../Context/APIcontext';
+import { useRestaurants } from '../../Context/APIcontext.tsx';
 import timeclock from '../../assets/time.png';
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
@@ -26,7 +26,7 @@ const Tour = () => {
   };
   return (
     <div className='tour'>
-       <header>
+       {/* <header>
         <div className='header-content'>
           <div className='left-item'>
             <div className='header_logo'>
@@ -42,7 +42,7 @@ const Tour = () => {
             </div>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
           <div className='burger-nav-header'>
@@ -71,9 +71,7 @@ const Tour = () => {
        </div>
       </Link>
 
-      <footer>
-      <Footer/>
-    </footer>
+
     </div>
   );
 }

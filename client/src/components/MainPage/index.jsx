@@ -8,7 +8,6 @@ const MainPage = () => {
     <div className='App'>
         <MainBanner/>
         
-        <Footer/>
     </div>
   )
 }

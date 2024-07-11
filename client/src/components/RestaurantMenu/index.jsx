@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useRestaurants } from '../../Context/APIcontext';
-import { useOrders } from '../../Context/OrdersProvider';
+import { useRestaurants } from '../../Context/APIcontext.tsx';
+import { useOrders } from '../../Context/OrdersProvider.tsx';
 import timeclock from '../../assets/time.png';
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
 import heartVector from '../../assets/Vector.png';
 import heartIconBtn from '../../assets/hearticonbtn.png';
-import './RestaurantMenu.css';
 import Vector14 from '../../assets/Vector14.png';
 import Filter from '../../assets/filter.png';
-import Footer from '../Footer'
+import Footer from '../Footer';
+import './RestaurantMenu.css';
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -22,11 +22,31 @@ const RestaurantMenu = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
     window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
 
   const showModal = (title, description, image, price) => {
     setModalContent({ title, description, image, price });
@@ -74,26 +94,14 @@ const RestaurantMenu = () => {
   const uniqueCategories = [...new Set(restaurant.dishes.map(dish => JSON.stringify(dish.category)))].map(category => JSON.parse(category));
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const toggleFilter = () => {
-    if (filterOpen) {
-      setFilterOpen(false);
-    } else {
-      setFilterOpen(true);
-    }
-  };
+  const toggleFilter = () => setFilterOpen(!filterOpen);
 
   return (
     <>
       <header>
         <div className='header-content'>
-          <div className='left-item'>
-            <div className='header_logo'>
-              <img src={restaurant.logo} alt={`${restaurant.title}`} />
-            </div>
-            <div className='info-block'>
-              <img src={timeclock} alt='time' /> {restaurant.oClock}
-            </div>
-          </div>
+          <div className='left-item'></div>
+          <h1 style={{ textAlign: "center" }}>{restaurant.title}</h1>
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>
               <img src={Vector14} alt="Меню" />
@@ -102,31 +110,29 @@ const RestaurantMenu = () => {
         </div>
       </header>
 
-      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`} ref={menuRef}>
         <div className='burger-nav-header'>
-          <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
-          <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
+          <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}>
+            <span className='my-order-item'>Мой заказ</span>
+          </Link>
+          <div onClick={toggleMenu} className='nav-header-item'>
+            <img src={Vector14} alt="Меню" />
+          </div>
         </div>
         <Link to={`/restaurant/${id}/menu`} onClick={toggleMenu}>Меню</Link>
         <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
         <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
         <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
         <Link to={`/`} onClick={toggleMenu}>На главную</Link>
-        <div className='social-networks '>
-          <div className='phone-number'>{restaurant.phoneNumber}</div>
-          <div className='d0flex'>
-            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
-            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
-          </div>
-          <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
-          <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
-        </div>
       </div>
-      <div className='title_menu'>
 
+      <div className='title_menu'>
         <h1>Меню</h1>
-        <span onClick={toggleFilter} className='filter_item'>Фильтр <img src={Filter} alt="" /></span>
+        <span onClick={toggleFilter} className='filter_item'>
+          Фильтр <img src={Filter} alt="" />
+        </span>
       </div>
+
       <div className={`filter_categories ${filterOpen ? 'filter_categoriesOpen' : 'filter_categoriesClose'}`}>
         {uniqueCategories.map(category => (
           <div key={category._id} className='category_item'>
@@ -151,19 +157,22 @@ const RestaurantMenu = () => {
             <div className='menu-item'>
               <div className='left_item_menu'>
                 <h3>{menuItem.title}</h3>
+              </div>
+              <p className='description_item'>{menuItem.description}</p>
+              <div className='detail_menu'>
+                  <button onClick={() => showModal(menuItem.title, menuItem.description, menuItem.image, menuItem.price)}>Подробнее</button>
+                </div>
+
+                <div className='bottom_card'>
+                <p>{menuItem.price}тг</p>
                 <button
                   className='like-btn'
                   onClick={() => handleAddToOrder(menuItem)}>
                   <img src={isFavorite(menuItem) ? heartIconBtn : heartVector} alt="Like" />
                 </button>
-              </div>
-              <div className='right_item_menu'>
-                <p>{menuItem.price}ТГ</p>
-                <div className='detail_menu'>
-                  <button onClick={() => showModal(menuItem.title, menuItem.description, menuItem.image, menuItem.price)}>Подробнее</button>
                 </div>
               </div>
-            </div>
+            
           </div>
         ))}
       </div>
@@ -171,7 +180,7 @@ const RestaurantMenu = () => {
       {modalVisible && (
         <div className='modals'>
           <div className='modal-contents'>
-            <span className='close' onClick={hideModal}>&times;</span>
+            <span className='close' onClick={hideModal}>Закрыть</span>
             <img src={modalContent.image} alt="Dish" />
             <h1>{modalContent.title}</h1>
             <p>{modalContent.description}</p>
@@ -180,15 +189,10 @@ const RestaurantMenu = () => {
         </div>
       )}
 
-      <Link style={{textDecoration:"none"}}  to={`/my-orders/${restaurant._id}`}>
-      <div className='btn-backto-page'>
-        Мои заказы
-      </div>
+      <Link style={{ textDecoration: "none" }} to={`/my-orders/${restaurant._id}`}>
+        <div className='btn-backto-page'>Мои заказы</div>
       </Link>
 
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 };

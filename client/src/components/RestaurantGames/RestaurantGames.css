@@ -2,10 +2,13 @@
     cursor: pointer;
     background-color: #565656;
     font-family: "Raleway", sans-serif;
+    border-radius: 20px;
   }
   
   .card_menu_game img {
     width: 100%;
+    border-radius: 20px;
+
   }
   
   .card_menu_game p {
@@ -15,7 +18,7 @@
   .restaurant-games {
     display: grid;
     grid-template-columns: 1fr 1fr ;
-    gap: 5px;
+    gap: 20px;
   }
   
   .modal-overlay {
@@ -49,17 +52,13 @@
   .modal-button {
     position: absolute;
     top: 0px;
-    right: 0px;
+    left: 0px;
     background-color: rgba(255, 3, 3, 0.1);
     border: none;
     padding: 10px;
     cursor: pointer;
     color: white;
   }
-  
   .modal-button:hover {
     background-color: #f0f0f0;
   }
-  footer{
-    padding: 40px 0;
-}

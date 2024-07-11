@@ -7,7 +7,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
   }
   
   .clear-orders:hover {
@@ -34,20 +36,7 @@
     font-weight: bold;
     margin-top: 10px;
   }
-  .detail_menu {
-    margin-top: 10px;
-  }
-  
-  .detail_menu button {
-    background-color: transparent;
-    border: none;
-    color: #6DDF37;
-    font-family: "Raleway", sans-serif;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-  }
+
   
   .detail_menu button:hover {
     color: #4CAF50;

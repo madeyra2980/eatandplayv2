@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useRestaurants } from '../../Context/APIcontext';
+import { useRestaurants } from '../../Context/APIcontext.tsx';
 import './institution.css';
 import Filter from '../../assets/filter.png';
 
@@ -38,7 +38,7 @@ const Institution = () => {
   return (
     <div className='main_block_institutions'>
       <div className='filter_preference_title'>
-      <span>Выбор заведений <img onClick={openFilterPreference} src={Filter} alt="" /></span>
+      <span className='filter_preference_container'>Выбор заведений <img onClick={openFilterPreference} src={Filter} alt="" /></span>
       </div>
       <div className={`${filterPreferenceOpen ? "filter_preference" : "hidden"}`}>
       <p>Предпочтения</p>

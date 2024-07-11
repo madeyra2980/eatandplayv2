@@ -1,25 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useRestaurants } from '../../Context/APIcontext';
-import timeclock from '../../assets/time.png';
-import location from '../../assets/location.png';
-import whatsapp from '../../assets/whatsapp.png';
-import instagram from '../../assets/instagram.png';
-import heartVector from '../../assets/Vector.png';
+import { useRestaurants } from '../../Context/APIcontext.tsx';
 import './Promotions.css'; 
 import Vector14 from '../../assets/Vector14.png'; 
-import Footer from '../Footer';
 
 const Promotions = () => {
   const { id } = useParams();
   const { restaurant, loading, getFetchDataRestaurant } = useRestaurants();
   const [menuOpen, setMenuOpen] = useState(false); 
+  const menuRef = useRef(null);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
     window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
 
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
   if (loading) {
     return <div>Загрузка...</div>;
   }
@@ -35,13 +46,11 @@ const Promotions = () => {
      <header>
         <div className='header-content'>
           <div className='left-item'>
-            <div className='header_logo'>
-              <img src={restaurant.logo} alt={`${restaurant.title}`} />
-            </div>
-            <div className='info-block'>
-              <img src={timeclock} alt='time' /> {restaurant.oClock}
-            </div>
+          
           </div>
+
+        <h1>{restaurant.title}</h1>
+
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>
               <img src={Vector14} alt="Меню" />
@@ -49,8 +58,9 @@ const Promotions = () => {
           </div>
         </div>
       </header>
+
       
-      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`} ref={menuRef}>
           <div className='burger-nav-header'>
             <Link style={{textDecoration:"none"}} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
             <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
@@ -61,20 +71,10 @@ const Promotions = () => {
           <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
           <Link to={`/`} onClick={toggleMenu}>На главную</Link>
 
-          <div className='social-networks '>
-            <div className='phone-number'>{restaurant.phoneNumber}</div>
-            <div className='d0flex'>
-            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
-            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
-            </div>
-            <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
-            <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
-          </div>
         </div>
 
       <div className='title_menu'>
         <h1>Акции и Скидки</h1>
-        <h1>{restaurant.title}</h1>
       </div>
 
       <div className='promotions-cards'>
@@ -91,9 +91,7 @@ const Promotions = () => {
       Назад     
        </div>
       </Link>
-        <footer>
-      <Footer/>
-      </footer>
+ 
     </div>
   );
 }

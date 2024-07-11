@@ -24,8 +24,8 @@ const RestaurantForm = () => {
     const fetchData = async () => {
       try {
         const [dishesResponse, preferencesResponse] = await Promise.all([
-          fetch('https://eatandplayv2.onrender.com/categories/dishes'),
-          fetch('https://eatandplayv2.onrender.com/categories/preference')
+          fetch('http://localhost:4444/dishes'),
+          fetch('http://localhost:4444/preference')
         ]);
 
         if (!dishesResponse.ok || !preferencesResponse.ok) {
@@ -133,7 +133,7 @@ const RestaurantForm = () => {
 
       });
 
-      const response = await fetch('https://eatandplayv2.onrender.com/categories/restaurants', {
+      const response = await fetch('http://localhost:4444/restaurants', {
         method: 'POST',
         body: formData,
       });
@@ -145,7 +145,6 @@ const RestaurantForm = () => {
       const data = await response.json();
       console.log('Ресторан успешно создан:', data);
 
-      // Очистка формы после успешной отправки
       setRestaurantData({
         title: '',
         description: '',

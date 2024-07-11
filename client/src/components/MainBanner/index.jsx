@@ -15,32 +15,13 @@ const Main = () => {
 
         <div className='App'>
             <div className='container_main'>
-                <div className='shashki_main'>
-                    <img src={shashki} alt="" />
-                </div>
+             
                 <div className='header_banner'>
                     <div className='banner_titles'>
                     <h1>EAT&PLAY</h1>
                     <p>Сервис по поиску заведений <span>подходящего под ваш запрос <img src={lupa} alt="" /> </span></p>
                     </div>
-                    <div className='header_items'>
-                        <div className='header_items_card'>
-                            <img src={menu} alt="" />
-                            <p>Выбирайте меню</p>
-                        </div>
-                        <div className='header_items_card'>
-                            <img src={kubik} alt="" />
-                            <p>Играйте в игры с компанией в нашем сервисе</p>
-                        </div>
-                        <div className='header_items_card'>
-                            <img src={sales} alt="" />
-                            <p>Узнавайте о действующих акциях</p>
-                        </div>
-                        <div className='header_items_card'>
-                            <img src={video} alt="" />
-                            <p>Посмотрите обстановку заведения через ЗD-тур</p>
-                        </div>
-                    </div>
+            
                 </div>
                 <Institution/>
             </div>

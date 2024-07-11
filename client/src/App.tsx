@@ -1,17 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Institution from './components/Institution';
-import { RestaurantsProvider } from '../src/Context/APIcontext';
+import { RestaurantsProvider } from '../src/Context/APIcontext.tsx';
 import RestaurantDetail from './components/RestaurantDetail';
 import MainPage from './components/MainPage';
 import RestaurantMenu from './components/RestaurantMenu';
-import MyOrders from './components/MyOrders';
-import { OrdersProvider } from './Context/OrdersProvider';
+import MyOrders from './components/MyOrders/index.tsx';
+import { OrdersProvider } from './Context/OrdersProvider.tsx';
 import RestaurantGames from './components/RestaurantGames';
 import Promotions from './components/Promotions';
 import Tooures from './components/Tooures';
+import Footer from './components/Footer/index.jsx';
 
-const App = () => {
+const App:React.FC = () => {
   return (
     <OrdersProvider>
       <RestaurantsProvider>
@@ -24,9 +25,9 @@ const App = () => {
             <Route path="/games/:id" element={<RestaurantGames />} />
             <Route path="/my-orders/:id" element={<MyOrders />} />
             <Route path='/promotions/:id' element={<Promotions/>} />
-            {/* <Route path='/tooures/:id' element={<Tooures/>}/> */}
         </Routes>
       </Router>
+      <Footer/>
     </RestaurantsProvider>
   </OrdersProvider>
 

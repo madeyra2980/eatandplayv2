@@ -8,7 +8,7 @@ const path = require('path');
 
 
 const BASE_URL = 'http://eatandplayv2.onrender.com'
-
+// const LOCAL_URL = 'http://localhost:' 
 
 mongoose.connect(process.env.MONGO_DB , { 
     useNewUrlParser: true, 
@@ -64,7 +64,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `${BASE_URL}/images/${req.file.filename}`,
+        image_url: `http://localhost:/images/${req.file.filename}`,
     });
 });
 

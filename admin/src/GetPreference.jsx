@@ -9,7 +9,7 @@ const GetPreference = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://eatandplayv2.onrender.com/categories/preference');
+        const response = await fetch('http://localhost:4444/preference');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -24,7 +24,7 @@ const GetPreference = () => {
 
   const handleUpdatePreference = async (preferenceId) => {
     try {
-      const response = await fetch(`https://eatandplayv2.onrender.com/categories/preference/${preferenceId}`, {
+      const response = await fetch(`http://localhost:4444/preference/${preferenceId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const GetPreference = () => {
 
   const handleDeletePreference = async (preferenceId) => {
     try {
-      const response = await fetch(`https://eatandplayv2.onrender.com/categories/preference/${preferenceId}`, {
+      const response = await fetch(`http://localhost:4444/preference/${preferenceId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

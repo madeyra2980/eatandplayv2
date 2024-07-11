@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Modal from 'react-modal';
-import { useRestaurants } from '../../Context/APIcontext';
+import { useRestaurants } from '../../Context/APIcontext.tsx';
 import timeclock from '../../assets/time.png';
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
@@ -22,11 +22,30 @@ const RestaurantGames = () => {
   const [isBootleModalOpen, setBootleModalOpen] = useState(false);
   const [isQuizAppModalOpen, setQuizAppModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     getFetchDataRestaurant(id);
     window.scrollTo(0, 0);
   }, [id, getFetchDataRestaurant]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
 
   const openBootleModal = () => {
     setBootleModalOpen(true);
@@ -57,13 +76,10 @@ const RestaurantGames = () => {
       <header>
         <div className='header-content'>
           <div className='left-item'>
-            <div className='header_logo'>
-              <img src={restaurant.logo} alt={`${restaurant.title}`} />
-            </div>
-            <div className='info-block'>
-              <img src={timeclock} alt='time' /> {restaurant.oClock}
-            </div>
+ 
           </div>
+        <h1>{restaurant.title}</h1>
+
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>
               <img src={Vector14} alt="Меню" />
@@ -74,10 +90,9 @@ const RestaurantGames = () => {
 
       <div className='title_menu'>
         <h1>Игры</h1>
-        <h1>{restaurant.title}</h1>
       </div>
 
-      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`} ref={menuRef}>
         <div className='burger-nav-header'>
           <Link style={{ textDecoration: "none" }} to={`/my-orders/${id}`} onClick={toggleMenu}><span className='my-order-item'>Мой заказ</span></Link>
           <div onClick={toggleMenu} className='nav-header-item'><img src={Vector14} alt="Меню" /></div>
@@ -87,15 +102,7 @@ const RestaurantGames = () => {
         <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
         <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
         <Link to={`/`} onClick={toggleMenu}>На главную</Link>
-        <div className='social-networks '>
-          <div className='phone-number'>{restaurant.phoneNumber}</div>
-          <div className='d0flex'>
-            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
-            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
-          </div>
-          <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
-          <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
-        </div>
+
       </div>
       <div className='restaurant-games'>
         <div className='card_menu_game' onClick={openBootleModal}>
@@ -125,7 +132,7 @@ const RestaurantGames = () => {
         className="modal-content"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeQuizAppModal} className="modal-button">Закрыть</button>
+        <button onClick={closeQuizAppModal} className="modal-button" >Закрыть</button>
         <div className="modal-iframe">
           <QuizApp />
         </div>
@@ -136,9 +143,7 @@ const RestaurantGames = () => {
           Назад
         </div>
       </Link>
-      <footer>
-        <Footer />
-      </footer>
+
     </div>
   );
 }

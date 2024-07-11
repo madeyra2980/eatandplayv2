@@ -13,7 +13,7 @@ const CategoryForm = () => {
     event.preventDefault(); // Предотвращаем перезагрузку страницы
 
     try {
-      const response = await fetch('https://eatandplayv2.onrender.com/categories/categories', {
+      const response = await fetch('http://localhost:4444/categories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

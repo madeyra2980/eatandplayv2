@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Обновление категории
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;

@@ -1,4 +1,4 @@
-// models/Categories.js
+// models/Categories.
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
