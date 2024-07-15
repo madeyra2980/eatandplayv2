@@ -219,6 +219,7 @@ header {
 	text-decoration: underline;
 	color: white;
 	margin-top: 10px;
+	font-size:13px;
   }
   
   .item_block:hover {
