@@ -6,10 +6,15 @@
     background-color: #565656;
     font-family: "Raleway", sans-serif;
     border-radius: 15px;
-    font-size: 14px;
     width: 90%;
     margin: auto;
-    padding: 5px 10px;
+    padding: 13px 0;
+}
+.banner_titles h1{
+    font-size: 40px;
+}
+.banner_titles p{
+    font-size: 16px;
 }
 .header_banner {
     z-index: 1;

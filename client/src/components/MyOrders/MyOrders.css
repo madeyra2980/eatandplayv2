@@ -1,15 +1,22 @@
 .clear-orders {
-    background-color: #6DDF37;
-    color: white;
+     color: #6DDF37;
     font-family: "Raleway", sans-serif;
-    font-size: 18px;
-    padding: 10px 20px;
+    padding: 10px 0px;
     border: none;
     border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
-    margin: 40px auto;
-    display: flex;
+    display: flex; 
+    width: 80%;
     justify-content: center;
+    background-color: transparent; 
+    margin: 40px auto;
+    border: 1px solid #6DDF37;
+    padding: 10px 0;
+    text-align: center;
+    color: #6DDF37;
+    border-radius: 14px;
+    cursor: pointer;
   }
   
   .clear-orders:hover {
@@ -45,35 +52,27 @@
   .quantity-control {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 10px;
+    border: 1px solid #6DDF37;
+    border-radius: 20px;
+    gap: 10px;
   }
   
   .quantity-control button {
-    background-color: #6DDF37;
-    color: white;
     border: none;
     font-family: "Raleway", sans-serif;
-    font-size: 20px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    /* font-size: 14px; */
     cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .quantity-control button:hover {
-    background-color: #4CAF50;
-  }
-  
-  .quantity-control span {
-    margin: 0 10px;
-    font-size: 18px;
-    font-weight: bold;
+    background: none;
+    display: flex;
     color: white;
   }
-  
+  .quantity-control span {
+    font-size: 17px;
+  }
   .quantity-control button:disabled {
-    background-color: #ccc;
     cursor: not-allowed;
+    background-color: none;
   }
     

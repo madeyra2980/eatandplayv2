@@ -2,15 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useRestaurants } from '../../Context/APIcontext.tsx';
 import { useOrders } from '../../Context/OrdersProvider.tsx';
-import timeclock from '../../assets/time.png';
-import location from '../../assets/location.png';
-import whatsapp from '../../assets/whatsapp.png';
-import instagram from '../../assets/instagram.png';
+import backbtn from '../../assets/backbutton.png'
 import heartVector from '../../assets/Vector.png';
 import heartIconBtn from '../../assets/hearticonbtn.png';
 import Vector14 from '../../assets/Vector14.png';
 import Filter from '../../assets/filter.png';
-import Footer from '../Footer';
 import './RestaurantMenu.css';
 
 const RestaurantMenu = () => {
@@ -100,8 +96,9 @@ const RestaurantMenu = () => {
     <>
       <header>
         <div className='header-content'>
-          <div className='left-item'></div>
-          <h1 style={{ textAlign: "center" }}>{restaurant.title}</h1>
+          <div className='left-item'>
+              <Link to={`/restaurant/${id}/`}><img src={backbtn} alt="" /></Link>
+          </div>
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>
               <img src={Vector14} alt="Меню" />
@@ -160,8 +157,10 @@ const RestaurantMenu = () => {
               </div>
               <p className='description_item'>{menuItem.description}</p>
               <div className='detail_menu'>
-                  <button onClick={() => showModal(menuItem.title, menuItem.description, menuItem.image, menuItem.price)}>Подробнее</button>
-                </div>
+                  <button
+                      style={{ fontSize: '9px' }} 
+                      onClick={() => showModal(menuItem.title, menuItem.description, menuItem.image, menuItem.price)}>Подробнее</button>
+                   </div>
 
                 <div className='bottom_card'>
                 <p>{menuItem.price}тг</p>

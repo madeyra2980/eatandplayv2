@@ -11,7 +11,6 @@ import Vector14 from '../../assets/Vector14.png';
 import location from '../../assets/location.png';
 import whatsapp from '../../assets/whatsapp.png';
 import instagram from '../../assets/instagram.png';
-import Footer from '../Footer';
 
 const RestaurantDetail = () => {
   const { id } = useParams();
@@ -83,14 +82,18 @@ const RestaurantDetail = () => {
 
         <div className='contents-container'>
           <div className='locationItem'>
-            <div className='card_location'><img src={timeclock} alt="" />{restaurant.oClock}</div>
-            <div className='card_location'><img src={location} alt="" />{restaurant.address}</div>
+            <div className='card_location'><img src={timeclock} width={10} alt="" />{restaurant.oClock}</div>
+            <div className='card_location'><img src={location} width={10} alt="" />{restaurant.address}</div>
           </div>
           {console.log(restaurant.address)}
-          <span className='socialMediaItems'>
-            <a className='xWhatsapp' href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a>
-            <a href={restaurant.instagram} className='xinstagramm'><img src={instagram} alt="" /></a>
+          <div className='social-media-items'>
+          <span className='card-media-items'> 
+            <a className='xWhatsapp' href={restaurant.whatsapp}><img width={20} src={whatsapp} alt="" /></a>
           </span>
+          <span className='card-media-items'>
+            <a href={restaurant.instagram} className='xinstagramm'><img width={15} src={instagram} alt="" /></a>
+          </span>
+          </div>
         </div>
 
         <div className='items_block'>

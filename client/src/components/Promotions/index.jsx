@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useRestaurants } from '../../Context/APIcontext.tsx';
 import './Promotions.css'; 
 import Vector14 from '../../assets/Vector14.png'; 
+import backbtn from '../../assets/backbutton.png'
 
 const Promotions = () => {
   const { id } = useParams();
@@ -46,10 +47,8 @@ const Promotions = () => {
      <header>
         <div className='header-content'>
           <div className='left-item'>
-          
+          <Link to={`/restaurant/${id}/`}><img src={backbtn} alt="" /></Link>
           </div>
-
-        <h1>{restaurant.title}</h1>
 
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>

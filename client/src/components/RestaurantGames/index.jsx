@@ -2,17 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { useRestaurants } from '../../Context/APIcontext.tsx';
-import timeclock from '../../assets/time.png';
-import location from '../../assets/location.png';
-import whatsapp from '../../assets/whatsapp.png';
-import instagram from '../../assets/instagram.png';
-import heartVector from '../../assets/Vector.png';
+import backbtn from '../../assets/backbutton.png'
 import Bottle from '../../assets/bottle.png';
 import './RestaurantGames.css';
 import Bootle from '../Games/Bootle';
 import QuizApp from '../Games/QuizApp';
 import Vector14 from '../../assets/Vector14.png';
-import Footer from '../Footer'
 
 Modal.setAppElement('#root');
 
@@ -76,9 +71,8 @@ const RestaurantGames = () => {
       <header>
         <div className='header-content'>
           <div className='left-item'>
- 
+          <Link to={`/restaurant/${id}/`}><img src={backbtn} alt="" /></Link>
           </div>
-        <h1>{restaurant.title}</h1>
 
           <div className='right-item'>
             <div className='burger-menu' onClick={toggleMenu}>

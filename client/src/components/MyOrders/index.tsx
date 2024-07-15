@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useOrders } from "../../Context/OrdersProvider.tsx";
 import { useRestaurants } from "../../Context/APIcontext.tsx";
-import timeclock from "../../assets/time.png";
-import location from "../../assets/location.png";
-import whatsapp from "../../assets/whatsapp.png";
-import instagram from "../../assets/instagram.png";
+import backbtn from '../../assets/backbutton.png'
 import heartVector from "../../assets/Vector.png";
 import heartIconBtn from "../../assets/hearticonbtn.png";
-import Footer from "../Footer/";
 import "./MyOrders.css";
+import line from '../../assets/line.png'
 import Vector14 from "../../assets/Vector14.png";
 
 const MyOrders = () => {
@@ -90,14 +87,8 @@ const MyOrders = () => {
       <header>
         <div className="header-content">
           <div className="left-item">
-            {/* <div className='header_logo'>
-              <img src={restaurant.logo} alt={`${restaurant.title}`} />
-            </div> */}
-            {/* <div className='info-block'>
-              <img src={timeclock} alt='time' /> {restaurant.oClock}
-            </div> */}
+          <Link to={`/restaurant/${id}/menu`}><img src={backbtn} alt="" /></Link>
           </div>
-          <h1 style={{ textAlign: "center" }}>{restaurant.title}</h1>
 
           <div className="right-item">
             <div className="burger-menu" onClick={toggleMenu}>
@@ -135,20 +126,11 @@ const MyOrders = () => {
         <Link to={`/`} onClick={toggleMenu}>
           На главную
         </Link>
-        {/* <div className='social-networks '>
-            <div className='phone-number'>{restaurant.phoneNumber}</div>
-            <div className='d0flex'>
-            <span><a href={restaurant.instagram}><img src={instagram} alt="" /></a></span>
-            <span><a href={restaurant.whatsapp}><img src={whatsapp} alt="" /></a></span>
-            </div>
-            <div className='flex-align'><img src={location} alt="" />{restaurant.address}</div>
-            <div className='flex-align'><img src={timeclock} alt="" />{restaurant.oClock}</div>
-          </div> */}
+       
       </div>
 
       <div className="title_menu">
         <h1>Меню</h1>
-        <h1>{restaurant.title}</h1>
       </div>
 
       <div className="orders-list">
@@ -162,10 +144,11 @@ const MyOrders = () => {
                 <div className="menu-item">
                   <div className="left_item_menu">
                     <h3>{order.title}</h3>
-                    <p>{order.description}</p>
                   </div>
+                    <p className='description_item'>{order.description}</p>
                   <div className="detail_menu">
                   <button
+                    style={{ fontSize: '9px' }} 
                     onClick={() =>
                       showModal(
                         order.title,
@@ -195,15 +178,20 @@ const MyOrders = () => {
                 </div>
                
                 <div className="quantity-control">
-                  <button onClick={() => decrementOrderQuantity(order._id)}>
+                  <button
+                   style={{fontSize:"21px"}}
+                   onClick={() => decrementOrderQuantity(order._id)}>
                     -
                   </button>
                   <span>{order.quantity}</span>
-                  <button onClick={() => incrementOrderQuantity(order._id)}>
+                  <button 
+                                     style={{fontSize:"21px"}}
+                  onClick={() => incrementOrderQuantity(order._id)}>
                     +
                   </button>
                 </div>
               </div>
+              
             ))
           ) : (
             <div>Корзина пуста</div>
@@ -223,6 +211,9 @@ const MyOrders = () => {
               {order.title}.....................{order.price * order.quantity}ТГ
             </p>
           ))}
+          <div>
+            <img src={line} alt="" />
+          </div>
           <div className="total_price">Итого: {totalSum}ТГ</div>
         </div>
       )}

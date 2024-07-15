@@ -19,7 +19,7 @@ const Main = () => {
                 <div className='header_banner'>
                     <div className='banner_titles'>
                     <h1>EAT&PLAY</h1>
-                    <p>Сервис по поиску заведений <span>подходящего под ваш запрос <img src={lupa} alt="" /> </span></p>
+                    <p>Сервис по поиску заведений <span>подходящего под ваш запрос<img src={lupa} alt="" width={14} /> </span></p>
                     </div>
             
                 </div>
