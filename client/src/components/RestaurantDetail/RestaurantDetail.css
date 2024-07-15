@@ -137,8 +137,8 @@ header {
 	transition: background-color 0.3s ease-in-out;
 	height: 90px;
 	display: flex;
-	justify-content: center;
-	padding: 5px;
+	justify-content: space-between;
+	padding: 5px 15px; 
 	gap: 40px;
   }
 
@@ -161,8 +161,19 @@ header {
 	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
-	/* gap: 10px; */
 }
+.card-media-items-second{
+	background-color: #565656;
+	width: 45%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}
+.card-media-items, .card-media-items-second{
+	height: 35px;
+}
+
 
 
 .locationItem{

@@ -88,10 +88,10 @@ const RestaurantDetail = () => {
           {console.log(restaurant.address)}
           <div className='social-media-items'>
           <span className='card-media-items'> 
-            <a className='xWhatsapp' href={restaurant.whatsapp}><img width={20} src={whatsapp} alt="" /></a>
+            <a className='xWhatsapp' href={restaurant.whatsapp}><img  width={20} src={whatsapp} alt="" /></a>
           </span>
-          <span className='card-media-items'>
-            <a href={restaurant.instagram} className='xinstagramm'><img width={15} src={instagram} alt="" /></a>
+          <span className='card-media-items-second'>
+            <a href={restaurant.instagram} className='xinstagramm'><img width={20} src={instagram} alt="" /></a>
           </span>
           </div>
         </div>
