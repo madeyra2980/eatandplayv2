@@ -1,13 +1,11 @@
 .clear-orders {
-     color: #6DDF37;
+    color: #6DDF37;
     font-family: "Raleway", sans-serif;
-    padding: 10px 0px;
     border: none;
     border-radius: 5px;
-    font-size: 14px;
     cursor: pointer;
     display: flex; 
-    width: 80%;
+    width: 93%;
     justify-content: center;
     background-color: transparent; 
     margin: 40px auto;
@@ -17,6 +15,7 @@
     color: #6DDF37;
     border-radius: 14px;
     cursor: pointer;
+    font-size: 11px;
   }
   
   .clear-orders:hover {
@@ -28,11 +27,11 @@
     margin: auto;
     padding: 10px 20px;
     line-height: 1;
-    background-color: #565656;
     color: white;
     font-family: "Raleway", sans-serif;
     margin-top: 20px;
     border-radius: 5px;
+    margin-bottom: 20px;
   }
   
   .sum_total_menu p {
@@ -45,18 +44,18 @@
   }
 
   
-  .detail_menu button:hover {
-    color: #4CAF50;
-  }
-  
   .quantity-control {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
     border: 1px solid #6DDF37;
     border-radius: 20px;
     gap: 10px;
+    height: 20px;
+    margin: auto;
+  }
+  .quantity-control-container{
+    padding: 10px;
   }
   
   .quantity-control button {

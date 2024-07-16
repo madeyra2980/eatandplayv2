@@ -145,7 +145,7 @@ const MyOrders = () => {
                   <div className="left_item_menu">
                     <h3>{order.title}</h3>
                   </div>
-                    <p className='description_item'>{order.description}</p>
+                    {/* <p className='description_item'>{order.description}</p> */}
                   <div className="detail_menu">
                   <button
                     style={{ fontSize: '9px' }} 
@@ -177,6 +177,7 @@ const MyOrders = () => {
                   </div>
                 </div>
                
+               <div className="quantity-control-container">
                 <div className="quantity-control">
                   <button
                    style={{fontSize:"21px"}}
@@ -191,7 +192,7 @@ const MyOrders = () => {
                   </button>
                 </div>
               </div>
-              
+              </div>
             ))
           ) : (
             <div>Корзина пуста</div>

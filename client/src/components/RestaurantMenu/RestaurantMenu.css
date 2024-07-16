@@ -14,30 +14,28 @@ body {
 }
 
 .restaurant-menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px; 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Колонки с минимальной шириной 120px */
+  gap: 10px; /* Расстояние между карточками */
+  padding: 10px;
+  justify-content: center; /* Центрирование контента */
+  align-items: start; /* Выравнивание элементов по верхнему краю */
 }
+
 
 .card_menu {
   display: flex;
   flex-direction: column;
   background-color: #494949;
-  width: 146px;
   border-radius: 10px;
-}
-
-.description_item{
-  padding: 5px 5px;
-  font-size: 9px;
+  overflow: hidden;
 }
 
 .bottom_card{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4px;
+  padding: 10px 10px;
   padding-bottom: 15px;
 }
 
@@ -51,31 +49,22 @@ body {
   height: auto;
   box-sizing: border-box;
 }
-
-
 .menu-item-image {
   width: 100%;
 }
-
 .menu-item-image img {
   width: 100%;
   height: 100px;
   object-fit: cover;
   border-radius: 15px 15px 0 0;
 }
-
-  .detail_menu button, .like-btn {
+.detail_menu button, .like-btn {
     background: none;
     border: none;
     cursor: pointer;
-  }
-
-  .detail_menu{
-    font-size: 4px;
-  }
-
-    
-  .detail_menu button {
+    color: #4CAF50;
+}
+.detail_menu button {
     background-color: transparent;
     border: none;
     font-family: "Raleway", sans-serif;
@@ -83,7 +72,8 @@ body {
     cursor: pointer;
     text-decoration: underline;
     transition: color 0.3s ease;
-  }
+    padding: 0px 10px;
+}
 
 .like-btn img {
   width: 20px;
@@ -144,17 +134,16 @@ body {
   color: #aaa;
   font-size: 13px;
   text-decoration:underline;
+  color: #6DDF37;
 }
 .left_item_menu{
-  padding: 15px 5px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
   font-size: 11px;
   font-weight: bold;
 }
-.left_item_menu p{
-  padding: 5px 0px;
-  font-size: 9px ;
 
+.left_item_menu h3{
+  padding: 10px 0px;
 }
 
 .close:hover {
@@ -181,7 +170,7 @@ body {
 }
 
 .title_menu {
-  padding: 24px 40px;
+  padding: 24px 14px;
   color: #9D9D9D;
   display: flex;
   justify-content: space-between;
@@ -237,11 +226,15 @@ body {
 .btn-backto-page {
   border: 1px solid #6DDF37;
   padding: 10px 0;
-  margin: 40px;
   text-align: center;
   color: #6DDF37;
   border-radius: 14px;
   cursor: pointer;
+  width: 94%;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-size: 11px;
 }
 
 .loading-container {

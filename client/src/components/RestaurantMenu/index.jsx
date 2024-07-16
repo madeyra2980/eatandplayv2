@@ -155,7 +155,6 @@ const RestaurantMenu = () => {
               <div className='left_item_menu'>
                 <h3>{menuItem.title}</h3>
               </div>
-              <p className='description_item'>{menuItem.description}</p>
               <div className='detail_menu'>
                   <button
                       style={{ fontSize: '9px' }} 
