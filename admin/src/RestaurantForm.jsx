@@ -24,8 +24,8 @@ const RestaurantForm = () => {
     const fetchData = async () => {
       try {
         const [dishesResponse, preferencesResponse] = await Promise.all([
-          fetch('http://185.4.180.214:4444/dishes'),
-          fetch('http://185.4.180.214:4444/preference')
+          fetch('https://back.eatplay.kz/dishes'),
+          fetch('https://back.eatplay.kz/preference')
         ]);
 
         if (!dishesResponse.ok || !preferencesResponse.ok) {
@@ -133,7 +133,7 @@ const RestaurantForm = () => {
 
       });
 
-      const response = await fetch('http://185.4.180.214:4444/restaurants', {
+      const response = await fetch('https://back.eatplay.kz/restaurants', {
         method: 'POST',
         body: formData,
       });

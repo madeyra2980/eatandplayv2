@@ -18,6 +18,13 @@
     font-size: 11px;
   }
   
+  .line{
+    width: 90%;
+    height: 2px;
+    background-color: grey;
+    margin-top: 20px;
+  }
+
   .clear-orders:hover {
     background-color: #4CAF50;
   }

@@ -212,8 +212,7 @@ const MyOrders = () => {
               {order.title}.....................{order.price * order.quantity}ТГ
             </p>
           ))}
-          <div>
-            <img src={line} alt="" />
+          <div className="line"> 
           </div>
           <div className="total_price">Итого: {totalSum}ТГ</div>
         </div>

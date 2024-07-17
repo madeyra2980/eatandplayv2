@@ -101,11 +101,11 @@ const RestaurantGames = () => {
       <div className='restaurant-games'>
         <div className='card_menu_game' onClick={openBootleModal}>
           <img src={Bottle} alt="" />
-          <p>Игра на бутылочку</p>
+          <p>Игра "Бутылочка"</p>
         </div>
         <div className='card_menu_game' onClick={openQuizAppModal}>
           <img src={Bottle} alt="" />
-          <p>Игра угадай слово</p>
+          <p>Игра "Викторина"</p>
         </div>
         
       </div>

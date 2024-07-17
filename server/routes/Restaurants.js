@@ -52,11 +52,11 @@ router.post(
       const preferencesArray = preferenceName.split(',').map(id => id.trim());
       const promotionsArray = JSON.parse(promotions).map((promotion, index) => ({
         description: promotion.description,
-        image: `http://185.4.180.214:4444/images/${req.files["promotionImages"][index].filename}`
+        image: `https://back.eatplay.kz/images/${req.files["promotionImages"][index].filename}`
       }));
 
-      const logo_url = `http://185.4.180.214:4444/images/${req.files["logo"][0].filename}`;
-      const banner_url = `http://185.4.180.214:4444/images/${req.files["banner"][0].filename}`;
+      const logo_url = `https://back.eatplay.kz/images/${req.files["logo"][0].filename}`;
+      const banner_url = `https://back.eatplay.kz/images/${req.files["banner"][0].filename}`;
 
       const newRestaurant = new Restaurant({
         title,

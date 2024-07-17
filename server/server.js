@@ -6,7 +6,7 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 
-const BASE_URL = 'http://185.4.180.214:4444'
+const BASE_URL = 'https://back.eatplay.kz'
 
 mongoose.connect("mongodb+srv://askarovmadyar:Zxcvbnm@cluster0.vbht9au.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" , { 
     useNewUrlParser: true, 
@@ -62,7 +62,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `http://185.4.180.214:4444/images/${req.file.filename}`,
+        image_url: `https://back.eatplay.kz/images/${req.file.filename}`,
     });
 });
 
