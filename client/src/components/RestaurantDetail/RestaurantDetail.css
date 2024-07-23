@@ -111,7 +111,7 @@ header {
 	font-weight: bold;
 	color: #fff;
 	line-height: 2.4;
-	font-size: 16px;
+	font-size: 26px;
 
   }
   
@@ -119,7 +119,7 @@ header {
 	font-family: "Raleway", sans-serif;
 	color: #fff;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-	font-size: 10px;
+	font-size: 11px;
 	width: 66%;
 	margin: auto;
   }
@@ -132,7 +132,6 @@ header {
   
   .item_block {
 	background-color: #6B6767;
-	text-align: center;
 	border-radius: 20px;
 	transition: background-color 0.3s ease-in-out;
 	height: 90px;
@@ -155,7 +154,7 @@ header {
 	gap: 2px;
 }
 .card-media-items{
-	background-color: #565656;
+	background-color: #6B6767;
 	width: 45%;
 	display: flex;
 	justify-content: center;
@@ -163,7 +162,7 @@ header {
 	border-radius: 10px;
 }
 .card-media-items-second{
-	background-color: #565656;
+	background-color: #6B6767;
 	width: 47%;
 	display: flex;
 	justify-content: center;
@@ -182,20 +181,21 @@ header {
 	align-items: center;
 	justify-content: center;
 	gap: 5px;
-	padding-top: 5px;
+	padding-top: 15px;
 	padding-bottom: 5px;
 	font-size: 11px;
 }
 .card_location{
 	display: flex;
 	align-items: center;
-	background-color: #565454;
+	background-color: #6B6767;
 	gap: 10px;
 	padding: 10px;
 	justify-content: center;
 	width: 87%;
 	border-radius: 10px;
 	font-weight: 600;
+	font-size: 11px;
 }
 
 .socialMediaItems img{
@@ -219,7 +219,14 @@ header {
 	text-decoration: underline;
 	color: white;
 	margin-top: 10px;
-	font-size:13px;
+	font-size: 16px;
+	font-weight: 300;
+
+	/* padding: 0; */
+  }
+
+  .item_block{
+	/* padding-left: 20px; */
   }
   
   .item_block:hover {

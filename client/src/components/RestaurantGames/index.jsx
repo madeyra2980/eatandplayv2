@@ -8,6 +8,7 @@ import './RestaurantGames.css';
 import Bootle from '../Games/Bootle';
 import QuizApp from '../Games/QuizApp';
 import Vector14 from '../../assets/Vector14.png';
+import Bottlesecond from '../../assets/bottle2.png'
 
 Modal.setAppElement('#root');
 
@@ -95,19 +96,22 @@ const RestaurantGames = () => {
         <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
         <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
         <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
-        <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+        <Link to={`/restaurant/${id}`} onClick={toggleMenu}>На главную</Link>
 
       </div>
       <div className='restaurant-games'>
         <div className='card_menu_game' onClick={openBootleModal}>
-          <img src={Bottle} alt="" />
+          <img src={Bottlesecond} alt="" />
           <p>Игра "Бутылочка"</p>
         </div>
-        <div className='card_menu_game' onClick={openQuizAppModal}>
-          <img src={Bottle} alt="" />
-          <p>Игра "Викторина"</p>
-        </div>
-        
+   
+      {/* Тут у нас будет Викторина */}
+
+       {/*<div className='card_menu_game' onClick={openQuizAppModal}>
+         <img src={Bottle} alt="" />
+         <p>Игра "Викторина"</p>
+      </div>*/}
+
       </div>
       <Modal
         isOpen={isBootleModalOpen}
@@ -115,7 +119,7 @@ const RestaurantGames = () => {
         className="modal-content"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeBootleModal} className="modal-button">Закрыть</button>
+        {/* <button onClick={closeBootleModal} className="modal-button">Закрыть</button> */}
         <div className="modal-iframe">
           <Bootle />
         </div>
@@ -126,7 +130,7 @@ const RestaurantGames = () => {
         className="modal-content"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeQuizAppModal} className="modal-button" >Закрыть</button>
+        {/* <button onClick={closeQuizAppModal} className="modal-button" >Закрыть</button> */}
         <div className="modal-iframe">
           <QuizApp />
         </div>

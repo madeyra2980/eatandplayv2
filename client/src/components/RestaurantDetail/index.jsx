@@ -65,7 +65,7 @@ const RestaurantDetail = () => {
           <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
           <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
           <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
-          <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+        <Link to={`/restaurant/${id}`} onClick={toggleMenu}>На главную</Link>
           <div className='social-networks'></div>
         </div>
 
@@ -85,7 +85,7 @@ const RestaurantDetail = () => {
             <div className='card_location'><img src={timeclock} width={10} alt="" />{restaurant.oClock}</div>
             <div className='card_location'><img src={location} width={10} alt="" />{restaurant.address}</div>
           </div>
-          {console.log(restaurant.address)}
+
           <div className='social-media-items'>
           <span className='card-media-items'> 
             <a className='xWhatsapp' href={restaurant.whatsapp}><img  width={20} src={whatsapp} alt="" /></a>

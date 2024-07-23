@@ -53,11 +53,13 @@
   
   .modal-button {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: rgba(255, 3, 3, 0.1);
+    bottom: 0px;
+    left: 45%;
+    border-radius: 10px;
+    background-color: transparent;
     border: none;
     padding: 10px;
+    border: 1px solid white;
     cursor: pointer;
     color: white;
   }

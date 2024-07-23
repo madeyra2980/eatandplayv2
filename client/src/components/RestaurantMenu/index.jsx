@@ -120,7 +120,7 @@ const RestaurantMenu = () => {
         <Link to={`/games/${id}`} onClick={toggleMenu}>Игры на компанию</Link>
         <Link to={`/promotions/${id}`} onClick={toggleMenu}>Акции и скидки</Link>
         <Link to={`/tooures/${id}`} onClick={toggleMenu}>ЗD тур</Link>
-        <Link to={`/`} onClick={toggleMenu}>На главную</Link>
+        <Link to={`/restaurant/${id}`} onClick={toggleMenu}>На главную</Link>
       </div>
 
       <div className='title_menu'>
