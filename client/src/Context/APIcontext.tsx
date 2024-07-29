@@ -11,8 +11,7 @@ export const RestaurantsProvider = ({ children }) => {
   const [restaurantsCache, setRestaurantsCache] = useState({});
   const [preferences, setPreferences] = useState([]);
 
-  
-
+  // "NOP "
 
   useEffect(() => {
     const fetchRestaurants = async () => {
